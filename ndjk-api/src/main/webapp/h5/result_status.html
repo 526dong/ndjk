@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>认证结果</title>
+    <script src="../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../static/js/mobile_common_new.js"></script>
+    <script>
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+        window.onload = function () {
+            var successDOM = $(`
+                <div class="icon">
+                    <img src="../static/images/result_status/rz_icon_zmsuccess.png"/>
+                </div>
+                <div class="tips">
+                    <span>芝麻认证授权成功</span>
+                </div>`);
+
+            var failDOM =
+                $(`
+                <div class="icon">
+                    <img src="../static/images/result_status/rz_icon_zmfaild.png"/>
+                </div>
+                <div class="tips">
+                    <span>芝麻认证授权失败</span>
+                </div>`);
+
+            if (getQueryString('error_code')==='SUCCESS'){
+                $('.container').append(successDOM)
+            } else if (getQueryString('error_code')==='failed'){
+                $('.container').append(failDOM)
+            }
+
+        };
+    </script>
+
+
+    <link rel="stylesheet" href="../static/css/normalize.css">
+    <style>
+        .container {
+            width: 100%;
+            height: 100vh;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .icon{
+            margin-left: 0.43rem;
+            margin-top: 2.6rem;
+        }
+        .tips{
+            margin-top: 0.6rem;
+            font-size: 0.36rem;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+</body>
+</html>

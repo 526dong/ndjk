@@ -1,0 +1,31 @@
+body{margin: 0 0; padding:0 0;font-size:14px;color:#666;line-height:1.5em;font-family: "宋体"}
+h3,h4{color: #424242;}
+h3{text-align: center;}
+p ,ul,ol{margin: 0 0;padding: 0;list-style: none;
+    text-indent: 2em; line-height:24px;
+}
+actical{float:left;padding: 30px 10px;overflow: hidden}
+
+h4{margin-top:15px;}
+ul li{list-style: none}
+li{text-indent: 2em;}
+.dataT{min-width:32px;line-height: 1.25em;height: 1.25em;padding: 0 4px;font-weight: bolder;}
+.Pline{float: left;width:100%;margin-top:4px;display: block}
+
+.firstP{float: left;text-indent:0;font-size:14px;line-height:28px;margin: 0 0;height:26px!important;margin:0 0;padding:0 0;min-width:100%}
+.firstP *{float: left}
+.firstP i{font-style: normal}
+.firstP>span.dataT{display:inline-block;min-width:100px;line-height:26px;height:26px;margin:0 0;padding: 0 0;}
+.hetong{float: right;width: 100%;margin-bottom: 10px}
+.hetong *{float: right;width: auto}
+.hetong i{font-style: normal}
+.hetong .dataT{width: auto;border-bottom:none;}
+#protocalID:before{content: "合同编号：⌈";padding-right: 4px;font-weight: normal;}
+#protocalID:after{content: "⌋";padding-left: 4px;font-weight: normal;}
+
+#protocalsID:before{content: "协议编号：⌈";padding-right: 4px;font-weight: normal;margin-bottom: 10px}
+#protocalsID:after{content: "⌋";padding-left: 4px;font-weight: normal;}
+
+.fred{color:#ff0003;text-decoration: underline;font-weight: normal}
+.fblue{color:blue;text-decoration: underline;font-weight: normal}
+.fwb{font-weight: bolder;color: #424242}

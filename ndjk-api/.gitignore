@@ -1,0 +1,11 @@
+/target/
+*.iml
+#*.html
+/src/main/filter/filter-dev.properties
+/src/main/resources/config/server.property
+/src/main/webapp/augLongregister/
+/src/main/webapp/augregister/
+/src/main/webapp/downapp/
+/src/main/webapp/onlyregister/
+/src/main/webapp/register/
+

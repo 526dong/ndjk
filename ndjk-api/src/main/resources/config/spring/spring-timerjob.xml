@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+	<bean id="startQuertz" lazy-init="false" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="doRemoveTokenJobTask" /> -->
+				<ref bean="doTime5secForSMS" />
+				<ref bean="doTime30mins" />
+				<ref bean="doTime5sec" />
+				<ref bean="doTime3sec" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 每天清理token -->
+	<!-- <bean id="removeTokenJob" class="com.microdreams.timer.RemoveUsersTokenJob"></bean> -->
+	<!-- 定义调用对象和调用对象的方法 -->
+	<!-- <bean id="removeTokenJobTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		调用的类
+		<property name="targetObject">
+			<ref bean="removeTokenJob" />
+		</property>
+		调用类中的方法
+		<property name="targetMethod">
+			<value>timeTask</value>
+		</property>
+	</bean> -->
+	<!-- 定义触发时间 -->
+	<!-- <bean id="doRemoveTokenJobTask"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="removeTokenJobTask" />
+		</property>
+		cron表达式
+		<property name="cronExpression">每天凌晨1点 0 0 1 * * ?
+			<value>0 0 1 * * ? </value>
+		</property>
+	</bean> -->
+	
+	<!-- ================================================================================= -->
+	<bean id="quartzJob_sms_5sec" class="com.microdreams.timer.SMSJob"></bean>
+
+	<bean id="jobtask_sms_5sec"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="quartzJob_sms_5sec" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>timeTask</value>
+		</property>
+	</bean>
+	<!-- 定义触发时间 -->
+	<bean id="doTime5secForSMS"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="jobtask_sms_5sec" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression"><!-- 5sec -->
+			<value>0/5 * * * * ? </value>
+		</property>
+	</bean>
+	
+	<!-- ================================================================================= -->
+	
+	<!-- 要调用的工作类 -->
+	<bean id="quartzJob_30min" class="com.microdreams.timer.RemoveAdminTokenJob"></bean>
+	
+	<bean id="jobtask_30min"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="quartzJob_30min" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>timeTask</value>
+		</property>
+	</bean>
+	
+	<!-- 定义触发时间 -->
+	<bean id="doTime30mins"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="jobtask_30min" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression"><!-- 30分钟 -->
+			<value>0 0/30 * * * ? </value>
+		</property>
+	</bean>
+	
+	
+	<!-- ================================================================================= -->
+	
+	<!-- 要调用的工作类 -->
+	<bean id="quartzJob_push_5sec" class="com.microdreams.timer.PushJob"></bean>
+
+	<bean id="jobtask_push_5sec"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="quartzJob_push_5sec" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>timeTask</value>
+		</property>
+	</bean>
+	<!-- 定义触发时间 -->
+	<bean id="doTime5sec"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="jobtask_push_5sec" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression"><!-- 5sec -->
+			<value>0/5 * * * * ? </value>
+		</property>
+	</bean>
+	
+	
+	<!-- ================================================================================= -->
+	
+	
+	<!-- 要调用的工作类 -->
+	<bean id="quartzJob_push_3sec" class="com.microdreams.timer.PushJob"></bean>
+
+	<bean id="jobtask_push_3sec"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="quartzJob_push_3sec" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>timeTask</value>
+		</property>
+	</bean>
+	<!-- 定义触发时间 -->
+	<bean id="doTime3sec"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="jobtask_push_3sec" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression"><!-- 5sec -->
+			<value>0/5 * * * * ? </value>
+		</property>
+	</bean>
+	
+	
+	
+
+	
+	
+</beans>

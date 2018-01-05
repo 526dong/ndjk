@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>帮助中心</title>
+    <link rel="stylesheet" href="../static/css/help.css">
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/common.js"></script>
+</head>
+<body>
+<div class = "wrap">
+    <div style="background-color: #ffdfe0;height:42px;width: 100%;color: #555;text-align: center">
+        <a style="font-size:1.4rem;height:42px;line-height: 42px;" onclick=callPhoneMehtod('400-180-5009')><img width="22px"  style="vertical-align:middle;margin-top:-3px;padding-right: 2px" src="../static/images/h5img/tel.png">客服电话:400-180-5009
+            <i style="font-style: normal;font-size: 10px">(在线时间：9:30-18:00)</i></a>
+    </div>
+    <div class="Scopetit"><i class="imgT often"></i><span>常见问题</span></div>
+    <div class="problems">
+        <div class="list ">
+            <h4 class="ftit">为什么运营商一直在认证中或未认证？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>运营商通过后显示未认证，需要您重新认证；由于认证高峰期，可能会造成认证延时，如果运营商一直显示认证中请您耐心等待。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">为什么人脸认证一直失败？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>如照相机权限已打开但人脸识别一直失败，请您选择光线明亮且不背光的场景进行拍摄，保持手机平稳，点头、摇头、张嘴、眨眼等动作缓慢操作。（注意：请确认手机没有第三方权限管理软件进行权限屏蔽）</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">为什么人脸认证一直提示SDK错误？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>如您认证过程中一直提示SDK错误，请您关闭APP再次打开或下载安装最新版本APP进行尝试。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">为什么我的身份证一直扫描不成功？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>如照相机权限已打开但身份证扫描一直不成功，请您寻找光源明亮且不背光的场景进行拍摄，保证身份证边缘与取景框平齐，手机拍摄平稳。（注意：请确认手机没有第三方权限管理软件进行权限屏蔽）</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">为什么我的联系人一直保存不成功？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>如通讯录权限已打开但联系人一直保存不成功，请您关闭当前程序再次打开或下载最新版本的APP进行尝试。（注意：请确认手机没有第三方权限管理软件进行权限屏蔽）</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">已转账还款但APP的状态还是待还款？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>线下还款（支付宝或微信）转账，因冲账延迟，还款状态不能实时变更。如当日18:00前转账还款，账单当日即可结清；如18:00后转账还款，账单最晚次日结清，请耐心等待。还款时间以转账到账为准，因冲账延迟导致的费用系统会自动减免，不会额外收取费用，也不影响您的信用。
+                    如对还款问题还有疑问，联系立马有钱在线客服或电话400-180-5009（服务时间：工作日9:30-18:00）</p>
+            </div>
+        </div>
+    </div>
+    <div class="Scopetit"><i class="imgT rz"></i><span>认证相关问题</span></div>
+    <div class="problems">
+        <div class="list ">
+            <h4 class="ftit">借款人需要满足什么条件？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>18-45周岁中国公民；拥有稳定的收入来源且无不良的信用记录。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">具体的认证步骤有哪些？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>身份证认证、芝麻授权认证、手机运营商授权、联系人认证。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">为什么要提交这些资料？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>为了防止别人盗用您的信息，并更精确的计算您的授信额度。我们不会将您的信息作为其他用途。会严格遵守监管部门规定，保护用户个人信息。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">申请借款的流程？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>用本人实名认证的手机号注册立马有钱-&gt;完成必要的认证-&gt;申请借款额度与期限-&gt;等待审核-&gt;等待打款-&gt;收到打款。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">为什么需要获取相机等设备授权？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <!--<p>由于您没有授权立马有钱读取联系人的权限。①iOS用户，可以通过设置-&gt;隐私-&gt;通讯录-&gt;立马有钱开启权限；②安卓用户，具体设置方式根据机型不同而不同。可以到设置里面开启读取权限。</p>-->
+                <!--<p>由于您没有授权立马有钱读取联系人的权限。①iOS用户，可以通过设置-&gt;隐私-&gt;通讯录-&gt;立马有钱开启权限。</p>-->
+                <p>获取照相机、通讯录等设备授权，是为了您进行更好的认证；如果您拒绝设备授权，会影响您的认证授信。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">芝麻信用是必须的吗？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>立马有钱产品目前要求用户必须有芝麻信用且授权立马有钱读取您的芝麻信用分数，否则无法完成借款。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">提示运营商服务密码错误怎么办？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>提示运营商服务密码错误或忘记可以拨打运营商电话查询或更改服务密码（移动10086、联通10010、电信10000）</p>
+            </div>
+        </div>
+        <!--<div class="list ">-->
+        <!--<h4 class="ftit">目前平台支持的银行卡有哪些？<i class="Iarrow"></i></h4>-->
+        <!--<div class="fcont">-->
+        <!--<p>农业银行、交通银行、工商银行、邮储银行、浦发银行、广发银行、平安银行、招商银行、中国银行、建设银行、光大银行、兴业银行、中信银行、华夏银行、杭州银行、北京银行、恒丰银行。后续还会支持更多银行。</p>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+    <div class="Scopetit"><i class="imgT sh"></i><span>审核相关问题</span></div>
+    <div class="problems">
+        <div class="list ">
+            <h4 class="ftit">审核需要多久？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>审核提交后，会5分钟以内处理；如遇审核高峰期，可能会稍有延迟，请耐心等待。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">为什么我申请不了立马有钱？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>目前立马有钱服务仅对部分符合筛选条件的借款人开放。如果您暂时无法使用立马有钱，可以持续关注本产品，随着业务逐步放开，您也可能可以享受到快速便捷的借款服务。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">被拒绝后多长时间可以再次申请？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>被拒绝30天后即可再次申请。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">审核通过后多长时间可以到账？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>审核通过后，5分钟内即可到账；如遇银行系统维护等问题，实际到账时间以银行实际放款时间为准。</p>
+            </div>
+        </div>
+    </div>
+    <div class="Scopetit"><i class="imgT jk"></i><span>借款相关问题</span></div>
+    <div class="problems">
+        <div class="list ">
+            <h4 class="ftit">可借额度是多少？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>立马有钱的借款额度为500元~3000元。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">可借款期限是多少？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>首次借款用户可借款期限为14天、21天；复贷用户可借款日期为14天、21天、30天。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">审核放款时间是多久？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>一般情况下10分钟内完成审核放款，放款后会向您发送短信通知。如遇申请高峰期，可能会出现审核放款延迟，请耐心等待短信通知或关注app借款订单状态。如果对订单状态有疑问，可咨询客服电话400-180-5009，服务时间9:00-18：00。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">如何提高额度？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>目前额度由系统自动判断，额度会根据您的信用积累而提示，建议您保持良好的还款信用，额度会逐渐提升。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">放款中是否能取消放款？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>若您的借款申请已提交成功，无法取消。审核通过后会进行放款，放款成功后不支持取消。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">我的借款能否打到其他银行卡？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>您的借款只能放宽到您绑定的借款本人名下的银行借记卡内。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">什么是综合服务费？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>综合服务费包括支付信审费、账户管理费；如用户逾期综合服务费包括支付信审费、账户管理费、罚息。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">目前支持哪些银行卡？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>农业银行、北京银行、光大银行、广发银行、杭州银行、华夏银行、工商银行、建设银行、交通银行、平安银行、浦发银行、恒丰银行、兴业银行、邮政储蓄银行、招商银行、中国银行、中信银行。（只支持借记卡）</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">逾期会收取费用吗？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>平台会对逾期的费用收取逾期费和违约金。</p>
+            </div>
+        </div>
+    </div>
+    <div class="Scopetit"><i class="imgT repay"></i><span>还款相关问题</span></div>
+    <div class="problems">
+        <div class="list">
+            <h4 class="ftit two">如何确定还款日是哪天？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>1.可前往个人中心->借款记录选择当前的订单，查看订单详情页，即可看到应还款日；2.借款日即算还款日期（如1号借款，借款期限为21天，还款日为20号）。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">目前还款方式有哪些？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>目前用户的还款方式包括1.到期自动扣款；2.APP主动还款；3.如您想选择支付宝等线下转账还款，请致电客服400-180-5009（9:00 ~ 18:00）。（注意事项：借款人应在还款日之前将应还款项和费用存入借款时绑定的银行卡，系统会在还款日自动从银行卡扣除。为避免逾期还款对借款人的信用造成不良影响，请借款人牢记还款日期并及时操作。）</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">到期自动扣款是什么时间？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>我们会于您还款日当日9:30、13:30、17:30、21:30进行三次自动扣款，请您于还款日当日保证卡内余额充足。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">我能提前还款？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>您可以在您的借款详情页面点击主动还款进行提前还款操作。</p>
+            </div>
+        </div>
+        <div class="list">
+            <h4 class="ftit">还款日当天首次还款失败怎么办？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>如您于还款日当天收到自动扣款失败短信，请您核实还款银行卡内是否余额充足，且银行卡当日交易额度未超过银行当日交易限额；如遇银行系统维护导致扣款失败产生的逾期费用，请致电客服解决400-180-5009（9:00 ~ 18:00）。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">为什么银行卡有钱还还款失败？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>如果您的还款卡有足额资金还是还款失败，建议您根据短信内容具体核实原因，具体有：<br />
+                    1.银联在线支付功能是否已开通，如无开通，建议您开通后再次尝试（开通方式：电脑端登录http://t.cn/R56Y74q，根据页面提示操作即可或手机端下载”银联钱包app“进入“卡管家”界面根据页面提示操作即可）。<br />
+                    2.还款银行卡账户状态是否正常，是否挂失或注销或其他不流通情况，如确认卡无异常，建议您还款尝试。<br />
+                    3.还款银行卡单笔、单天、单月是否已达到”还款金额上限“，具体可查看短信内容或咨询您的发卡行，若确实如此，建议您后续换卡尝试。<br />
+                    4.如遇银行系统维护导致还款失败，请您耐心等待银行通道恢复正常。
+                </p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">为什么还款后状态还是待还款？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>您的主动还款操作成功后或自动扣款成功后，请您耐心等待，状态变更以实际银行到账时间为准。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">不还款的影响有哪些？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>借款人在还款日未还款，第二天起开始计算逾期费用，逾期超过一定时间将酌情将借款人逾期情况记录在网络征信系统，逾期严重者会进入互联网征信黑名单，并承担相应的法律责任。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">未及时还款会不会影响个人征信？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>逾期还款是会产生逾期费用，逾期超过一定时间会将借款人相关信息提供给人民银行和芝麻信用等征信机构，会影响借款人征信情况，请借款人珍惜自己的信用。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">银行卡丢失注销或更换了，如何还款？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>如果银行卡卡注销或更换了，可以联系我们的客服人员，在其指导下还款，客服的服务时间为工作日的9:30-18:00，具体联系方式为：400客服热线为400-180-5009（服务时间：工作日9:30-18:00）。</p>
+            </div>
+        </div>
+    </div>
+    <div class="Scopetit"><i class="imgT cp"></i><span>产品相关问题</span></div>
+    <div class="problems">
+        <div class="list">
+            <h4 class="ftit">如何关注微信公众号？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>在微信中搜索“立马有钱花”，点击“关注”即可。</p>
+            </div>
+        </div>
+        <div class="list">
+            <h4 class="ftit two">注册或者更改密码时收不到验证码怎么办？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>重启手机或清理手机缓存；退订过短信，请联系客服恢复短信发送400-180-5009（9:00 ~ 18:00）。</p>
+            </div>
+        </div>
+        <div class="list">
+            <h4 class="ftit">如何更换手机号？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>目前暂时还不支持用户更改注册手机号码。</p>
+            </div>
+        </div>
+        <div class="list ">
+            <h4 class="ftit">如何更换银行卡？<i class="Iarrow"></i></h4>
+            <div class="fcont">
+                <p>用户当前借款还清后，前往个人中心重新绑定银行卡。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    (function () {
+        $(".problems").on("click",function(e){
+            console.log(e.target.tagName);
+            if(e.target.tagName == 'H4'){
+                $(e.target).parent().toggleClass('active');
+                $(e.target).parent().find("fcont").slideToggle();
+            }
+        })
+    })()
+</script>
+</body>
+</html>

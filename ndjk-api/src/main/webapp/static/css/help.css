@@ -1,0 +1,32 @@
+html{font-size: 62.5%;font-family: "宋体" "微软雅黑"}
+body{margin: 0 0;padding: 0 0px;}
+*{-webkit-tap-highlight-color:rgba(255,255,255,0)}
+h4{margin: 0 0;color:#0080f0;padding: 0 0;}
+.Scopetit{float:left;width: 100%;color:#424242;font-weight:normal;height:50px;font-size:1.7rem;position: relative;line-height:50px;text-align: left;text-indent:3.45rem;position: relative}
+.Scopetit span{position: absolute;top:0;left:3.45rem;right: 0px;height:50px;line-height:50px;border-bottom: thin solid #c9d3e0;text-align: left;text-indent:0;}
+.imgT{
+    width:20px;height:20px;overflow:hidden;
+    display:inline-block;background-repeat: no-repeat;background-size:20px 20px;
+    position: absolute;top:15px;left:10px;
+}
+.imgT.cp{background-image:url("../images/h5img/zc.png");}
+.imgT.jk{background-image:url("../images/h5img/jk.png");}
+.imgT.sh{background-image:url("../images/h5img/sh.png");}
+.imgT.rz{background-image:url("../images/h5img/rz.png");}
+.imgT.often{background-image:url("../images/h5img/often.png");}
+.imgT.repay{background-image:url("../images/h5img/repay.png");}
+.problems{float: left;width: 100%;box-sizing: border-box;padding-left:3.45rem;}
+.list{float: left;width: 100%}
+h4.ftit{float: left;width: 100%;height:42px;line-height:41px;border-bottom:1px solid #ccc;font-size: 1.5rem;font-weight: normal;position: relative;padding-right: 50px;white-space: nowrap;text-overflow:ellipsis;box-sizing: border-box;overflow: hidden}
+.fcont{float: left;width: 100%;font-size: 1.4rem;display: none}
+.fcont p{width: 100%;padding-right:3rem;font-size:1.4rem;box-sizing: border-box;color: #666;}
+.Iarrow{display:inline-block;width:12px;height:12px;background: url("../images/h5img/arrow.png") center center no-repeat;background-size:12px;position: absolute;top:15px;right:15px;
+    transform:rotate(0deg);-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-o-transform: rotate(0deg);
+    -moz-transition: all .2s;transition :all .2s;-webkit-transition: all .2s;-o-transition: all .2s;}
+.list.active h4.ftit{overflow: auto;height: auto;text-overflow:inherit;
+    overflow:visible;white-space: inherit;}
+
+.list.active h4.ftit.two{line-height:24px;padding-top: 0.88rem;padding-bottom:0.88rem;}
+.list.active .Iarrow{transform:rotate(180deg);-webkit-transform: rotate(180deg);-moz-transform:rotate(180deg) ;-o-transform:rotate(180deg) ;
+    -moz-transition: all .2s;transition :all .2s;-webkit-transition: all .2s;-o-transition: all .2s;}
+.list.active .fcont{display: block;border-bottom: 1px solid #c9d3e0}

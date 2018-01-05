@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/zoom.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var addStyleLink = function (href) {
+
+            var head = document.getElementsByTagName('head')[0];
+            var styleLink = document.createElement('link');
+            styleLink.setAttribute('rel', 'stylesheet');
+            styleLink.setAttribute('href', href);
+            head.appendChild(styleLink);
+
+        }
+        // 苹果手机style
+        if (/iphone/i.test(navigator.userAgent))
+            addStyleLink('css/style.css');
+        // 安卓手机style1
+        if (/android/i.test(navigator.userAgent))
+            addStyleLink('css/style1.css');
+
+    </script>
+    <script>
+        var jsonobj = {};
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+        //
+        $(document).ready(function () {
+            var orderNo = getQueryString("orderNo");
+            $.ajax({
+                type: 'POST',
+                url: '/api/act/mine/bankCard/loadBankCardInfo.htm',
+                data:{"orderNo":orderNo},
+                success: function (result) {
+                    if (result.code == 200) {
+                        var valCardNo = (result.data.cardNo).replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");
+                        $('.section_left').append("<p>" + result.data.openBbankName + "</p>")
+                        $('.section_left').append("<p>" + valCardNo + "</p>")
+                        $('.name').append("<span>" + result.data.userName + "</span>")
+                        $('.number').append("<span>" + result.data.idNumber + "</span>")
+                        jsonobj.token = result.data.token;
+                        jsonobj.api_version = result.data.api_version;
+                        jsonobj.no_order = result.data.no_order;
+                        jsonobj.oid_partner = result.data.oid_partner;
+                        jsonobj.time_stamp = result.data.time_stamp;
+                        jsonobj.user_id = result.data.user_id;
+                        jsonobj.flag_chnl = result.data.flag_chnl;
+                        successBack()
+                    } else {
+                        var resultMsg = JSON.stringify(result);
+                        feedBack(orderNo, 2, resultMsg)
+                    }
+                },
+                error: function (data) {
+                    var resultMsg = JSON.stringify(data);
+                    resultMsg = "error1" + resultMsg;
+                    feedBack(orderNo, 2,resultMsg)
+                }
+            });
+
+            function successBack() {
+                console.log("SignInitRequestData:" + JSON.stringify(jsonobj));
+                new LLPay().setData(JSON.stringify(jsonobj)).signReq(function (data) {
+                    console.log("SignReturnedData:" + JSON.stringify(data));
+                    var retCode = data.ret_code;
+                    if (retCode && retCode == '0000') {
+                        var noAgree = data.no_agree;
+                        $.ajax({
+                            type: 'POST',
+                            url: '/api/act/mine/bankCard/saveBankCard.htm',
+                            data:{"orderNo":orderNo,"noAgree":noAgree},
+                            success: function (result) {
+                                if (result.code == 200) {
+                                    var resultMsg = JSON.stringify(result);
+                                    feedBack(orderNo, 1,resultMsg)
+                                } else {
+                                    var resultMsg = JSON.stringify(result);
+                                    feedBack(orderNo, 2,resultMsg)
+                                }
+                            },
+                            error: function (data) {
+                                console.log(data)
+                                var resultMsg = JSON.stringify(data);
+                                resultMsg = "error2"+resultMsg;
+                                feedBack(orderNo, 2,resultMsg);
+                            }
+                        });
+                    } else {
+                        var resultMsg = JSON.stringify(data);
+                        feedBack(orderNo, 2,resultMsg)
+                    }
+                });
+            }
+
+            function feedBack(orderNo, status, resultMsg) {
+                console.log('orderNo', orderNo, 'status', status,"resultMsg",resultMsg)
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/act/mine/bankCard/bindCardFeedBack.htm',
+                    data:{"orderNo":orderNo,"status":status,"resultMsg":resultMsg},
+                    success: function (result) {
+                        console.log(result)
+                        if (result.code == 200) {
+                            var returnUrl = result.returnUrl;
+                            window.location.href = returnUrl;
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+</head>
+<body>
+<section class="section">
+    <div class="section_left">
+        <!-- <p>中国招商银行</p>
+        <p>8021****************111</p> -->
+    </div>
+    <div class="section_right">
+        <span>借记卡</span>
+    </div>
+</section>
+<section class="merchant">
+    <p class="text">商户名称：<span style="color: #333;">富银弘远（厦门）信息科技有限公司</span></p>
+</section>
+<section class="personal">
+    <div class="name">
+        <span>持卡人姓名</span>
+    </div>
+    <div class="card">
+        <span>证件类型</span>
+        <span>身份证</span>
+    </div>
+    <div class="number">
+        <span>证件号码</span>
+    </div>
+</section>
+</body>
+<script type="text/javascript" src="https://wap.lianlianpay.com/lib/llpay.min.js" charset="utf-8"></script>
+</html>

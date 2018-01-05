@@ -1,0 +1,13 @@
+/target/
+
+/src/main/resources/config/server.property
+
+*.iml
+/cashloan-manage/src/main/node_modules/
+/src/main/filter/filter-dev.properties
+cashloan-manage/src/main/node_modules
+/cashloan-manage/src/main/webapp/build/
+/cashloan-manage/src/main/webapp/dev/
+*.js
+*.html
+*.css
