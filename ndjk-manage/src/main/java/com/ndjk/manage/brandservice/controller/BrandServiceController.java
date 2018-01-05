@@ -1,8 +1,10 @@
-package com.ndjk.manage.kindergarten.controller;
+package com.ndjk.manage.brandservice.controller;
 
 import com.ndjk.cl.brandservice.model.Kindergarten;
 import com.ndjk.cl.brandservice.model.resp.JsonResult;
+import com.ndjk.cl.brandservice.service.BrandServiceService;
 import com.ndjk.cl.brandservice.service.KindergartenService;
+import com.ndjk.manage.kindergarten.controller.KindergartenController;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,23 +20,34 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Created by xzd on 2018/1/2.
- * @Description 幼儿园
+ * @author Created by zfwlz on 2017/12/17.
+ * @Description 品牌服务controller
  */
 @Controller
-@RequestMapping(value = "/manage/kindergarten")
-public class KindergartenController {
-    private static Logger logger = LogManager.getLogger(KindergartenController.class);
+@RequestMapping(value = "/manage/brandservice")
+public class BrandServiceController {
+    private static Logger logger = LogManager.getLogger(BrandServiceController.class);
+
+    @Autowired
+    private BrandServiceService brandServiceService;
 
     @Autowired
     private KindergartenService kindergartenService;
 
+
+   /* 1、搜索服务列表接口
+2、添加账号接口
+3、受理接口
+4、发货接口
+5、查询物流接口*/
+
+
     /**
-     * 查询幼儿园用户列表
+     * 搜索服务列表接口
      * @param request
      * @return object
      */
-    @RequestMapping(value = "/findAll", method = RequestMethod.POST)
+    @RequestMapping(value = "/searchservicelist", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult findAll(HttpServletRequest request) {
         //查询条件
@@ -43,7 +56,6 @@ public class KindergartenController {
         List<Kindergarten> kindergartens = new ArrayList<>();
         try {
             //通过姓名和状态进行幼儿园列表查询
-            kindergartens = kindergartenService.selectListByNameAndState(name, state);
             return JsonResult.ok(kindergartens, "幼儿园列表查询成功");
         } catch (Exception e) {
             logger.error("幼儿园模块报错：幼儿园列表查询异常!", e);
@@ -56,7 +68,7 @@ public class KindergartenController {
      * @param kindergarten
      * @return
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/addkgacount", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult add(Kindergarten kindergarten) {
         //处理新增账号中account属性
@@ -70,7 +82,7 @@ public class KindergartenController {
             kindergartenService.insertSelective(kindergarten);
             return JsonResult.ok("保存成功");
         } catch (Exception e) {
-            logger.error("幼儿园模块报错：新增幼儿园账号异常异常!", e);
+            logger.error("幼儿园服务模块报错：新增幼儿园账号异常!", e);
             return JsonResult.error(400,"保存失败");
         }
     }
@@ -89,7 +101,7 @@ public class KindergartenController {
             kindergartenService.updateSelective(kindergarten);
             return JsonResult.ok("更新成功");
         } catch (Exception e) {
-            logger.error("幼儿园模块报错：幼儿园账号更新异常!", e);
+            logger.error("幼儿园模块报错：更新异常!", e);
             return JsonResult.error(400, "更新失败");
         }
     }
@@ -106,7 +118,7 @@ public class KindergartenController {
             kindergartenService.deleteById(id);
             return JsonResult.ok("删除成功");
         } catch (Exception e) {
-            logger.error("幼儿园模块报错：幼儿园账号删除异常!", e);
+            logger.error("幼儿园模块报错：删除异常!", e);
             return JsonResult.error(400, "删除失败");
         }
     }
@@ -123,7 +135,7 @@ public class KindergartenController {
             kindergartenService.updatePwdById(kindergarten);
             return JsonResult.ok("密码重置成功");
         } catch (Exception e) {
-            logger.error("幼儿园模块报错：幼儿园账号密码重置异常!", e);
+            logger.error("幼儿园模块报错：密码重置异常!", e);
             return JsonResult.error(400, "密码重置失败");
         }
     }
