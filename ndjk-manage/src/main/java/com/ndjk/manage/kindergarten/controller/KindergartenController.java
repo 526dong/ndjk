@@ -70,7 +70,7 @@ public class KindergartenController {
         kindergarten.setCreateTime(new Date());
         try {
             kindergartenService.insertSelective(kindergarten);
-            return JsonResult.ok("保存成功");
+            return JsonResult.ok("++++++厉害了我的哥++++++保存成功");
         } catch (Exception e) {
             logger.error("幼儿园模块报错：保存异常!", e);
             return JsonResult.error(400,"保存失败");
