@@ -59,11 +59,6 @@ public class KindergartenController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult add(Kindergarten kindergarten) {
-        //处理新增账号中account属性
-        String account = kindergarten.getAccount();
-        if (account != null && !"".equals(account)) {
-            kindergarten.setLoginName(account);
-        }
         //创建时间
         kindergarten.setCreateTime(new Date());
         try {
