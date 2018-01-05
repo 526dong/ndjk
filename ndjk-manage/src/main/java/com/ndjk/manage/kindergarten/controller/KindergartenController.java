@@ -1,7 +1,5 @@
 package com.ndjk.manage.kindergarten.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ndjk.cl.brandservice.model.Kindergarten;
 import com.ndjk.cl.brandservice.model.resp.JsonResult;
 import com.ndjk.cl.brandservice.service.KindergartenService;
