@@ -18,6 +18,10 @@ public class JsonResult implements Serializable{
     public JsonResult() {
     }
 
+    public JsonResult(Integer code) {
+        this.code = code;
+    }
+
     public JsonResult(Integer code, String message) {
         this.code = code;
         this.message = message;
@@ -32,6 +36,10 @@ public class JsonResult implements Serializable{
         this.code = code;
         this.data = data;
         this.message = message;
+    }
+
+    public static JsonResult ok() {
+        return new JsonResult(200);
     }
 
     public static JsonResult ok(String msg) {

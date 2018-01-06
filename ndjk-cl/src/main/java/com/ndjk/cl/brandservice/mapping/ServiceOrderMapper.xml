@@ -181,4 +181,43 @@
     from service_order
     where kg_id = #{kgId,jdbcType=INTEGER}
   </select>
+
+  <!--查询服务列表--><!--kg.id kgId,-->
+  <select id="selectList" resultType="java.util.Map" parameterType="java.util.Map">
+    SELECT
+      so.id orderId,
+      so.order_no orderNo,
+      so.state state,
+      DATE_FORMAT(so.create_time, '%Y-%m-%d %h:%i:%s') applyTime,
+      kg.kg_name name,
+      so.apply_name applyName,
+      so.phone applyPhone,
+      (
+        select
+          GROUP_CONCAT(a.total)
+        from
+        (
+          SELECT
+            CONCAT(bs.name, '*', os.count) as total
+          FROM
+              brand_service bs,
+              order_service os
+          WHERE
+              bs.id = os.service_id
+        ) a
+      ) as serviceDetail,
+      so.price price
+    FROM
+	  service_order so,
+	  kindergarten kg
+    <where>
+      so.kg_id = kg.id
+      <if test="null != kgName and '' != kgName" > and kg.kg_name = #{kgName} </if>
+      <if test="null != applyName and '' != applyName" > and so.apply_name = #{applyName} </if>
+      <if test="null != applyPhone and '' != applyPhone" > and so.phone = #{applyPhone} </if>
+      <if test="null != applyStartTime and applyStartTime != ''">and DATE_FORMAT(so.create_time,'%Y-%m-%d')>= #{applyStartTime}</if>
+      <if test="null != applyEndTime and applyEndTime != ''">and #{applyEndTime}>= DATE_FORMAT(so.create_time,'%Y-%m-%d')</if>
+      <if test="null != state and '' != state" > and so.state = #{state} </if>
+    </where>
+  </select>
 </mapper>

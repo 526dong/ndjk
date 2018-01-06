@@ -59,12 +59,12 @@ public class ServiceOrder implements Serializable{
         this.id = id;
     }
 
-    public Integer getKgid() {
+    public Integer getKgId() {
         return kgId;
     }
 
-    public void setKgid(Integer kgid) {
-        this.kgId = kgid;
+    public void setKgId(Integer kgId) {
+        this.kgId = kgId;
     }
 
     public String getApplyName() {

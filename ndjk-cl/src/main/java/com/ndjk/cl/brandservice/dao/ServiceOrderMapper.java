@@ -3,6 +3,7 @@ package com.ndjk.cl.brandservice.dao;
 import com.ndjk.cl.brandservice.model.ServiceOrder;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ServiceOrderMapper {
     int deleteByPrimaryKey(Integer id);
@@ -18,4 +19,10 @@ public interface ServiceOrderMapper {
     int updateByPrimaryKey(ServiceOrder record);
 
     List<ServiceOrder> selectListByKgId(int kgId);
+
+    /**
+     * 查询服务列表
+     * @return
+     */
+    List<Map<String, Object>> selectList(Map<String, Object> params);
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zfwlz on 2017/12/26.
@@ -77,6 +78,15 @@ public class BrandServiceOrderServiceImpl implements BrandServiceOrderService{
             selectApplyServiceListRespModels.add(selectApplyServiceListRespModel);
         }
         return selectApplyServiceListRespModels;
+    }
+
+    /**
+     * 查询服务列表
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> selectList(Map<String, Object> params) {
+        return this.serviceOrderMapper.selectList(params);
     }
 
 }

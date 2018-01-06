@@ -4,6 +4,7 @@ import com.ndjk.cl.brandservice.model.ServiceOrder;
 import com.ndjk.cl.brandservice.model.resp.ApplyServiceListModel;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 平拍服务订单
@@ -24,4 +25,10 @@ public interface BrandServiceOrderService {
      * @return
      */
     List<ApplyServiceListModel> selectByKgId(int bgId);
+
+    /**
+     * 查询服务列表
+     * @return
+     */
+    List<Map<String, Object>> selectList(Map<String, Object> params);
 }

@@ -48,7 +48,7 @@ public class BrandServiceController {
         serviceOrder.setActivityName(applyServiceReq.getActivityName());
         serviceOrder.setApplyName(applyServiceReq.getApplyName());
         serviceOrder.setIsShipping(2);
-        serviceOrder.setKgid(applyServiceReq.getKgId());
+        serviceOrder.setKgId(applyServiceReq.getKgId());
         serviceOrder.setOrderNo("1231231");
         serviceOrder.setPhone(applyServiceReq.getPhone());
         serviceOrder.setWork(applyServiceReq.getWork());
