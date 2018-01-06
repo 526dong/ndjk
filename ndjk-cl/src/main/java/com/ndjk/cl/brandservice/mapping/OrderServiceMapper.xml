@@ -22,6 +22,11 @@
     delete from order_service
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <!--通过orderId删除订单服务关联信息-->
+  <delete id="deleteRelateByOrderId" parameterType="java.lang.Integer">
+    delete from order_service
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.ndjk.cl.brandservice.model.OrderService" >
     insert into order_service (id, order_id, service_id, 
       price, count, create_time

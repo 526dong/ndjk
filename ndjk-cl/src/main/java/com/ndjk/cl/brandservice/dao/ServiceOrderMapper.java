@@ -21,6 +21,13 @@ public interface ServiceOrderMapper {
     List<ServiceOrder> selectListByKgId(int kgId);
 
     /**
+     * 通过订单id查询服务列表
+     * @param orderId
+     * @return
+     */
+    List<Map<String, Object>> selectServiceByOrderId(Integer orderId);
+
+    /**
      * 查询服务列表
      * @return
      */

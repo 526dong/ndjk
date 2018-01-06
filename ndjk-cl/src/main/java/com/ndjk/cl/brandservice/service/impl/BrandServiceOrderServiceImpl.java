@@ -3,6 +3,7 @@ package com.ndjk.cl.brandservice.service.impl;
 import com.ndjk.cl.brandservice.dao.ServiceOrderMapper;
 import com.ndjk.cl.brandservice.model.BrandService;
 import com.ndjk.cl.brandservice.model.OrderService;
+import com.ndjk.cl.brandservice.model.OrderServicePackage;
 import com.ndjk.cl.brandservice.model.ServiceOrder;
 import com.ndjk.cl.brandservice.model.resp.ApplyServiceListModel;
 import com.ndjk.cl.brandservice.service.BrandOrderServiceService;
@@ -78,6 +79,23 @@ public class BrandServiceOrderServiceImpl implements BrandServiceOrderService{
             selectApplyServiceListRespModels.add(selectApplyServiceListRespModel);
         }
         return selectApplyServiceListRespModels;
+    }
+
+    /**
+     * 通过订单id查询服务列表
+     * @param orderId
+     * @return
+     */
+    @Override
+    public OrderServicePackage.Order selectServiceByOrderId(Integer orderId) {
+        //订单信息
+        ServiceOrder serviceOrder = serviceOrderMapper.selectByPrimaryKey(orderId);
+        //订单服务数据包
+        OrderServicePackage.Order order = new OrderServicePackage.Order();
+        order.setOrderId(serviceOrder.getId());
+        order.setOrderNo(serviceOrder.getOrderNo());
+        order.setOrderServiceList(this.serviceOrderMapper.selectServiceByOrderId(orderId));
+        return order;
     }
 
     /**

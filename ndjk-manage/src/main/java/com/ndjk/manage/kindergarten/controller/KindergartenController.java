@@ -18,8 +18,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Created by xzd on 2018/1/2.
  * @Description 幼儿园
+ * @author Created by xzd on 2018/1/2.
  */
 @Controller
 @RequestMapping(value = "/manage/kindergarten")

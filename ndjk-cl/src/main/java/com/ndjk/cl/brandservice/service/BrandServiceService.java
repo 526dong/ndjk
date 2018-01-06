@@ -22,6 +22,13 @@ public interface BrandServiceService {
     void updateSelective(BrandService brandService);
 
     /**
+     * 更新订单服务信息
+     * @param orderId
+     * @param priceJsonStr
+     */
+    void updateServiceByOrderId(Integer orderId, String priceJsonStr);
+
+    /**
      * 删除
      * @param id
      */
