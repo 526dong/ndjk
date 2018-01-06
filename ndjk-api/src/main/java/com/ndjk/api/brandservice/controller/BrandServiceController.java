@@ -35,6 +35,9 @@ public class BrandServiceController {
     @Autowired
     private BrandServiceService brandServiceService;
 
+
+
+
     /**
      * 申请服务
      * @param applyServiceReq
