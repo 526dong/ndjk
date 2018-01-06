@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 品牌服务
@@ -35,9 +36,15 @@ public class BrandServiceController {
     @Autowired
     private BrandServiceService brandServiceService;
 
-
-
-
+    //生成流水号使用的静态常量
+    private final static String str62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private final static int pixLen = 36;
+    private static volatile int pixOne = 0;
+    private static volatile int pixTwo = 0;
+    private static volatile int pixThree = 0;
+    private static volatile int pixFour = 0;
+    private static final AtomicInteger ATOM_INT = new AtomicInteger(0);
+    private static final int MAX_36 = 36 * 36 * 36 * 36;
     /**
      * 申请服务
      * @param applyServiceReq
@@ -52,7 +59,7 @@ public class BrandServiceController {
         serviceOrder.setApplyName(applyServiceReq.getApplyName());
         serviceOrder.setIsShipping(2);
         serviceOrder.setKgId(applyServiceReq.getKgId());
-        serviceOrder.setOrderNo("1231231");
+        serviceOrder.setOrderNo(createSerialNumber());
         serviceOrder.setPhone(applyServiceReq.getPhone());
         serviceOrder.setWork(applyServiceReq.getWork());
         serviceOrder.setState(1);
@@ -163,5 +170,33 @@ public class BrandServiceController {
             return  new BaseResponseModel(200,"操作成功");
         }
         return new BaseResponseModel(400,result);
+    }
+
+    /**
+     * 生成15位流水号(同一秒钟可生成160万个不重复的流水号)
+     *
+     * @return
+     */
+    public String createSerialNumber() {
+        StringBuilder sb = new StringBuilder(15);// 创建一个StringBuilder
+        sb.append(Long.toHexString(System.currentTimeMillis()));// 先添加当前时间的毫秒值的16进制
+        pixFour++;
+        if (pixFour == pixLen) {
+            pixFour = 0;
+            pixThree++;
+            if (pixThree == pixLen) {
+                pixThree = 0;
+                pixTwo++;
+                if (pixTwo == pixLen) {
+                    pixTwo = 0;
+                    pixOne++;
+                    if (pixOne == pixLen) {
+                        pixOne = 0;
+                    }
+                }
+            }
+        }
+        return sb.append(str62.charAt(pixOne)).append(str62.charAt(pixTwo))
+                .append(str62.charAt(pixThree)).append(str62.charAt(pixFour)).toString();
     }
 }
