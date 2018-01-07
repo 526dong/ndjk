@@ -126,7 +126,7 @@ public class BrandServiceController {
      */
     @RequestMapping(value = "/brandservice/getservicelist")
     @ResponseBody
-    public Object getservicelist(int type){
+    public Object getservicelist(Integer type){
         List<BrandService> brandServices = this.brandServiceService.selectByType(type);
         if(brandServices ==null || brandServices.size()<1){
             return new GetBrandServiceListRespModel(400,"服务列表为空");
@@ -135,6 +135,8 @@ public class BrandServiceController {
         for(BrandService brandService:brandServices){
             GetBrandServiceInfo getBrandServiceInfo =
                     new GetBrandServiceInfo(brandService.getName(),brandService.getImageurl());
+            getBrandServiceInfo.setId(brandService.getId());
+            getBrandServiceInfo.setType(brandService.getType());
             getBrandServiceInfos.add(getBrandServiceInfo);
         }
         return new GetBrandServiceListRespModel(200,"操作成功",getBrandServiceInfos);
