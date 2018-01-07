@@ -120,7 +120,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ndjk.cl.brandservice.model.BrandService" >
     update brand_service
-    set name = #{name,jdbcType=VARCHAR},
+    set `name` = #{name,jdbcType=VARCHAR},
       `type` = #{type,jdbcType=INTEGER},
       imageUrl = #{imageurl,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
@@ -136,5 +136,14 @@
     from brand_service
     where `type` = #{type,jdbcType=INTEGER}
     and status = 1
+  </select>
+
+  <select id="selectByKgId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    `name`,os.count as count
+    from brand_service bs
+    left join order_service os on bs.id = os.service_id
+    left join service_order so on os.order_id = so.id
+    where so.kg_id = #{kgId,jdbcType=INTEGER}
   </select>
 </mapper>

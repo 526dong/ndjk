@@ -88,7 +88,7 @@
 	<!-- Spring aop事务管理 -->
 	<aop:config>
 		<aop:pointcut id="transactionPointcut"
-			expression="(execution(* com.web.module.*.service.*.*Impl.*(..))) or (execution(* com.ebusiness.module.*.service.*.*Impl.*(..))) or (execution(* com.microdreams.module.login.controller.app.*Helper.*(..))) or (execution(* com.microdreams.module.*.service.*.*Impl.*(..)))" />
+					  expression="(execution(* com.ndjk.cl.*.service.*.*Impl.*(..)))" />
 		<aop:advisor pointcut-ref="transactionPointcut"
 			advice-ref="transactionAdvice" />
 	</aop:config>

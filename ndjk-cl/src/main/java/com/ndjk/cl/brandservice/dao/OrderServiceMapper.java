@@ -17,5 +17,5 @@ public interface OrderServiceMapper {
 
     int updateByPrimaryKey(OrderService record);
 
-    List<OrderService> selectListByOrderId(int orderId);
+
 }

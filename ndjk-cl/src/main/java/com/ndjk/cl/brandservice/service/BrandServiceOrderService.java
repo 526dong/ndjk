@@ -1,5 +1,6 @@
 package com.ndjk.cl.brandservice.service;
 
+import com.ndjk.cl.brandservice.model.OrderService;
 import com.ndjk.cl.brandservice.model.ServiceOrder;
 import com.ndjk.cl.brandservice.model.resp.ApplyServiceListModel;
 
