@@ -15,11 +15,4 @@ public interface BrandOrderServiceService {
      * @param orderService
      */
     void insertSelective(OrderService orderService);
-
-    /**
-     * 根据订单id 查询服务列表
-     * @param OederId
-     * @return
-     */
-    List<OrderService> selectListByOrderId(int OederId);
 }

@@ -1,6 +1,7 @@
 package com.ndjk.cl.brandservice.dao;
 
 import com.ndjk.cl.brandservice.model.ServiceOrder;
+import com.ndjk.cl.brandservice.model.dto.ApiApplyServiceQueryModel;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ public interface ServiceOrderMapper {
 
     int updateByPrimaryKey(ServiceOrder record);
 
-    List<ServiceOrder> selectListByKgId(int kgId);
+    List<ApiApplyServiceQueryModel> selectApplyListByKgId(int kgId);
 
     /**
      * 查询服务列表
