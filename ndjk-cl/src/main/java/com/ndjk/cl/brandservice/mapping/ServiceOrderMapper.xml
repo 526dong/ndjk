@@ -189,7 +189,22 @@
     from service_order
     where kg_id = #{kgId,jdbcType=INTEGER}
   </select>
-
+  <!--通过订单id查询服务列表-->
+  <select id="selectServiceByOrderId" resultType="java.util.Map" parameterType="java.lang.Integer">
+    SELECT
+	  bs.id serviceId,
+	  bs.name serviceName,
+	  bs.price price,
+	  os.count count,
+	  bs.type serviceType
+    FROM
+        brand_service bs,
+        order_service os
+    WHERE
+      bs.id = os.service_id
+    AND os.order_id = #{orderId,jdbcType=INTEGER}
+    ORDER BY bs.type DESC
+  </select>
   <!--查询服务列表--><!--kg.id kgId,-->
   <select id="selectList" resultType="java.util.Map" parameterType="java.util.Map">
     SELECT

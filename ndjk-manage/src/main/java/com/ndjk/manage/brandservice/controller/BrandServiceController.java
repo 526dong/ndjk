@@ -1,15 +1,13 @@
 package com.ndjk.manage.brandservice.controller;
 
 import com.ndjk.cl.brandservice.model.Kindergarten;
-import com.ndjk.cl.brandservice.model.OrderService;
-import com.ndjk.cl.brandservice.model.ServiceOrder;
+import com.ndjk.cl.brandservice.model.OrderServicePackage;
 import com.ndjk.cl.brandservice.model.resp.JsonResult;
-import com.ndjk.cl.brandservice.service.BrandOrderServiceService;
 import com.ndjk.cl.brandservice.service.BrandServiceOrderService;
 import com.ndjk.cl.brandservice.service.BrandServiceService;
 import com.ndjk.cl.brandservice.service.KindergartenService;
 import com.ndjk.cl.utils.ControllerUtil;
-import com.ndjk.manage.kindergarten.controller.KindergartenController;
+import com.ndjk.cl.utils.MyRuntimeException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Created by zfwlz on 2017/12/17.
  * @Description 品牌服务controller
+ * @author Created by zfwlz on 2017/12/17.
  */
 @Controller
 @RequestMapping(value = "/manage/brandservice")
@@ -51,7 +49,8 @@ public class BrandServiceController {
     public JsonResult searchservicelist(HttpServletRequest request) {
         //查询条件-参数集合
         Map<String, Object> params = ControllerUtil.requestMap(request);
-        List<Map<String, Object>> serviceOrders = new ArrayList<>();
+        //尽量初始化集合大小
+        List<Map<String, Object>> serviceOrders = new ArrayList<>(10000);
         try {
             serviceOrders = serviceOrderService.selectList(params);
             return JsonResult.ok(serviceOrders, "服务列表查询成功");
@@ -80,61 +79,84 @@ public class BrandServiceController {
             kindergartenService.insertSelective(kindergarten);
             return JsonResult.ok("保存成功");
         } catch (Exception e) {
-            logger.error("幼儿园服务模块报错：新增幼儿园账号异常!", e);
+            logger.error("品牌服务模块报错：新增幼儿园账号异常!", e);
             return JsonResult.error(400,"保存失败");
         }
     }
 
     /**
+     * 查询订单服务接口
+     * @param orderId
+     * @return
+     */
+    @RequestMapping(value = "/selectOrderService", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult selectOrderService(@RequestParam(required = true) Integer orderId) {
+        //订单服务数据包
+        OrderServicePackage.Order orderEntity = new OrderServicePackage.Order();
+        try {
+            //通过订单id查询订单服务信息
+            orderEntity = serviceOrderService.selectServiceByOrderId(orderId);
+            return JsonResult.ok(orderEntity, "订单服务列表查询成功");
+        } catch (Exception e) {
+            logger.error("品牌服务模块报错：订单服务列表查询异常!", e);
+            return JsonResult.error(400, "订单服务列表查询失败");
+        }
+    }
+
+    /**
      * 受理接口
-     * @param kindergarten
+     * @param orderId
+     * @param priceJsonStr
      * @return
      */
     @RequestMapping(value = "/accept", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult accept(Kindergarten kindergarten) {
-        //更新时间
-        kindergarten.setUpdateTime(new Date());
+    public JsonResult accept(@RequestParam(required = true) Integer orderId, String priceJsonStr) {
         try {
-            kindergartenService.updateSelective(kindergarten);
-            return JsonResult.ok("更新成功");
+            brandServiceService.updateServiceByOrderId(orderId, priceJsonStr);
+            return JsonResult.ok("受理成功");
         } catch (Exception e) {
-            logger.error("幼儿园模块报错：更新异常!", e);
-            return JsonResult.error(400, "更新失败");
+            if (e instanceof MyRuntimeException) {
+                return JsonResult.error(400, e.getMessage());
+            } else {
+                logger.error("品牌服务模块报错：受理异常!", e);
+                return JsonResult.error(400, "受理失败");
+            }
         }
     }
 
     /**
      * 发货接口
-     * @param id
+     * @param orderId
+     * @param courier
+     * @param couNo
      * @return
      */
     @RequestMapping(value = "/delivery", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult delivery(@RequestParam Integer id) {
+    public JsonResult delivery(@RequestParam(required = true) Integer orderId, String courier, String couNo) {
         try {
-            kindergartenService.deleteById(id);
-            return JsonResult.ok("删除成功");
+            return JsonResult.ok("发货成功");
         } catch (Exception e) {
-            logger.error("幼儿园模块报错：删除异常!", e);
-            return JsonResult.error(400, "删除失败");
+            logger.error("品牌服务模块报错：发货异常!", e);
+            return JsonResult.error(400, "发货失败");
         }
     }
 
     /**
      * 查询物流接口
-     * @param kindergarten
+     * @param orderId
      * @return
      */
     @RequestMapping(value = "/checklogistics", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult checklogistics(Kindergarten kindergarten) {
+    public JsonResult checklogistics(@RequestParam(required = true) Integer orderId) {
         try {
-            kindergartenService.updatePwdById(kindergarten);
-            return JsonResult.ok("密码重置成功");
+            return JsonResult.ok("物流查询成功");
         } catch (Exception e) {
-            logger.error("幼儿园模块报错：密码重置异常!", e);
-            return JsonResult.error(400, "密码重置失败");
+            logger.error("品牌服务模块报错：物流查询异常!", e);
+            return JsonResult.error(400, "物流查询失败");
         }
     }
 }

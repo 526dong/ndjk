@@ -110,7 +110,7 @@ public class BrandServiceController {
         if(kindergarten.getStatus() != 1){
             return new BaseResponseModel(400,"账号或密码错误");
         }
-        if(!password.endsWith(kindergarten.getPassword())){
+        if(!password.equals(kindergarten.getPassword())){
             return new BaseResponseModel(400,"账号或密码错误");
         }
         if(!code.equals("123456")){

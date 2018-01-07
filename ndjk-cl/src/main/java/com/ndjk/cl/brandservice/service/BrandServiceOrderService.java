@@ -1,5 +1,6 @@
 package com.ndjk.cl.brandservice.service;
 
+import com.ndjk.cl.brandservice.model.OrderServicePackage;
 import com.ndjk.cl.brandservice.model.OrderService;
 import com.ndjk.cl.brandservice.model.ServiceOrder;
 import com.ndjk.cl.brandservice.model.resp.ApplyServiceListModel;
@@ -26,6 +27,13 @@ public interface BrandServiceOrderService {
      * @return
      */
     List<ApplyServiceListModel> selectByKgId(int bgId);
+
+    /**
+     * 通过订单id查询服务列表
+     * @param orderId
+     * @return
+     */
+    OrderServicePackage.Order selectServiceByOrderId(Integer orderId);
 
     /**
      * 查询服务列表

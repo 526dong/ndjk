@@ -23,4 +23,22 @@ public class BrandOrderServiceServiceImpl implements BrandOrderServiceService {
     public void insertSelective(OrderService orderService){
         this.orderServiceMapper.insertSelective(orderService);
     }
+
+    /**
+     * 通过orderId删除订单服务关联信息
+     * @param orderId
+     */
+    @Override
+    public void deleteRelateByOrderId(Integer orderId) {
+        this.orderServiceMapper.deleteRelateByOrderId(orderId);
+    }
+
+    /**
+     * 根据订单id 查询服务列表
+     * @param orderId
+     * @return
+     */
+    public List<OrderService> selectListByOrderId(int orderId){
+        return this.orderServiceMapper.selectListByOrderId(orderId);
+    }
 }

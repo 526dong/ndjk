@@ -15,4 +15,17 @@ public interface BrandOrderServiceService {
      * @param orderService
      */
     void insertSelective(OrderService orderService);
+
+    /**
+     * 通过orderId删除订单服务关联信息
+     * @param orderId
+     */
+    void deleteRelateByOrderId(Integer orderId);
+
+    /**
+     * 根据订单id 查询服务列表
+     * @param OederId
+     * @return
+     */
+    List<OrderService> selectListByOrderId(int OederId);
 }

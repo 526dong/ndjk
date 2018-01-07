@@ -22,6 +22,13 @@ public interface ServiceOrderMapper {
     List<ApiApplyServiceQueryModel> selectApplyListByKgId(int kgId);
 
     /**
+     * 通过订单id查询服务列表
+     * @param orderId
+     * @return
+     */
+    List<Map<String, Object>> selectServiceByOrderId(Integer orderId);
+
+    /**
      * 查询服务列表
      * @return
      */

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ndjk.cl.manage.recordservice.dao.OperateRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ndjk.cl.operaterecord.model.OperateRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
+    <result column="operate_type" property="operateType" jdbcType="VARCHAR" />
+    <result column="operate_content" property="operateContent" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, operator, operate_ip, operate_type, operate_content, operate_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from operate_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from operate_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ndjk.cl.operaterecord.model.OperateRecord" >
+    insert into operate_record (id, operator, operate_ip, 
+      operate_type, operate_content, operate_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{operator,jdbcType=VARCHAR}, #{operateIp,jdbcType=VARCHAR}, 
+      #{operateType,jdbcType=VARCHAR}, #{operateContent,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ndjk.cl.operaterecord.model.OperateRecord" >
+    insert into operate_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateIp != null" >
+        operate_ip,
+      </if>
+      <if test="operateType != null" >
+        operate_type,
+      </if>
+      <if test="operateContent != null" >
+        operate_content,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateIp != null" >
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null" >
+        #{operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="operateContent != null" >
+        #{operateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ndjk.cl.operaterecord.model.OperateRecord" >
+    update operate_record
+    <set >
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateIp != null" >
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null" >
+        operate_type = #{operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="operateContent != null" >
+        operate_content = #{operateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ndjk.cl.operaterecord.model.OperateRecord" >
+    update operate_record
+    set operator = #{operator,jdbcType=VARCHAR},
+      operate_ip = #{operateIp,jdbcType=VARCHAR},
+      operate_type = #{operateType,jdbcType=VARCHAR},
+      operate_content = #{operateContent,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
