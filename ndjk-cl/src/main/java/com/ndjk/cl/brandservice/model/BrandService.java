@@ -27,6 +27,8 @@ public class BrandService implements Serializable{
 
     private Integer status;
 
+    private Integer count;
+
     public BrandService() {
     }
 
@@ -100,5 +102,13 @@ public class BrandService implements Serializable{
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }
