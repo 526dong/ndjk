@@ -21,11 +21,4 @@ public interface BrandOrderServiceService {
      * @param orderId
      */
     void deleteRelateByOrderId(Integer orderId);
-
-    /**
-     * 根据订单id 查询服务列表
-     * @param OederId
-     * @return
-     */
-    List<OrderService> selectListByOrderId(int OederId);
 }

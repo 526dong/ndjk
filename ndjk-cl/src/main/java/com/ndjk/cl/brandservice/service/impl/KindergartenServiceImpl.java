@@ -2,7 +2,10 @@ package com.ndjk.cl.brandservice.service.impl;
 
 import com.ndjk.cl.brandservice.dao.KindergartenMapper;
 import com.ndjk.cl.brandservice.model.Kindergarten;
+import com.ndjk.cl.brandservice.model.resp.JsonResult;
+import com.ndjk.cl.brandservice.model.searchModel.SearchKindergartensModel;
 import com.ndjk.cl.brandservice.service.KindergartenService;
+import com.ndjk.cl.utils.RdPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,8 +59,18 @@ public class KindergartenServiceImpl implements KindergartenService{
      * @param state
      * @return
      */
-    public List<Kindergarten> selectListByNameAndState(String kgName, String state){
-        return this.kindergartenMapper.selectListByNameAndState(kgName,state);
+    public JsonResult selectListByNameAndState(String kgName, String state,int page,int size){
+
+        List<Kindergarten> kindergartens= this.kindergartenMapper.selectListByNameAndState(kgName,state);
+        RdPage rdPage = new RdPage(kindergartens.size(),page,size);
+        SearchKindergartensModel searchKindergartensModel = new SearchKindergartensModel(page, size);
+        searchKindergartensModel.setName(kgName);
+        searchKindergartensModel.setState(Integer.valueOf(state));
+        List<Kindergarten> kindergartenList = this.kindergartenMapper.selectKindergartenList(searchKindergartensModel);
+        JsonResult jsonResult = new JsonResult(200,"操作成功");
+        jsonResult.setData(kindergartenList);
+        jsonResult.setPage(rdPage);
+        return jsonResult;
     }
 
     /**
