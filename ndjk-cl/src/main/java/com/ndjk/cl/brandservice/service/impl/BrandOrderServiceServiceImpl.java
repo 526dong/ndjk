@@ -25,6 +25,15 @@ public class BrandOrderServiceServiceImpl implements BrandOrderServiceService {
     }
 
     /**
+     * 通过orderId删除订单服务关联信息
+     * @param orderId
+     */
+    @Override
+    public void deleteRelateByOrderId(Integer orderId) {
+        this.orderServiceMapper.deleteRelateByOrderId(orderId);
+    }
+
+    /**
      * 根据订单id 查询服务列表
      * @param orderId
      * @return

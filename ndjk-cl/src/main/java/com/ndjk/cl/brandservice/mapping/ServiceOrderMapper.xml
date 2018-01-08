@@ -15,6 +15,14 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <resultMap id="selectApplyListByKgIdMap"
+             type="com.ndjk.cl.brandservice.model.dto.ApiApplyServiceQueryModel"
+             extends="BaseResultMap">
+    <collection property="brandServiceList"
+                select="com.ndjk.cl.brandservice.dao.BrandServiceMapper.selectByKgId"
+                column="kg_id" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, kg_id, apply_name, `work`, phone, activity_name, order_no, state, is_shipping, price,
     create_time, update_time
@@ -175,13 +183,28 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectListByKgId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectApplyListByKgId" resultMap="selectApplyListByKgIdMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from service_order
     where kg_id = #{kgId,jdbcType=INTEGER}
   </select>
-
+  <!--通过订单id查询服务列表-->
+  <select id="selectServiceByOrderId" resultType="java.util.Map" parameterType="java.lang.Integer">
+    SELECT
+	  bs.id serviceId,
+	  bs.name serviceName,
+	  bs.price price,
+	  os.count count,
+	  bs.type serviceType
+    FROM
+        brand_service bs,
+        order_service os
+    WHERE
+      bs.id = os.service_id
+    AND os.order_id = #{orderId,jdbcType=INTEGER}
+    ORDER BY bs.type DESC
+  </select>
   <!--查询服务列表--><!--kg.id kgId,-->
   <select id="selectList" resultType="java.util.Map" parameterType="java.util.Map">
     SELECT

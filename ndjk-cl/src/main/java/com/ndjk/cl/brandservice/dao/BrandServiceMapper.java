@@ -23,4 +23,6 @@ public interface BrandServiceMapper {
      * @return
      */
     List<BrandService> selectByType(Integer type);
+
+    List<BrandService>  selectByKgId(Integer kgId);
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * json返回
- * Created by xzd on 2018/1/3.
+ * @author Created by xzd on 2018/1/3.
  */
 public class JsonResult implements Serializable{
     private static final long serialVersionUID = 1705234885908792437L;

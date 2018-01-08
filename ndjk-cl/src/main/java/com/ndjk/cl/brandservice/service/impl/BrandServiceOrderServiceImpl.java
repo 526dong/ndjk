@@ -3,7 +3,9 @@ package com.ndjk.cl.brandservice.service.impl;
 import com.ndjk.cl.brandservice.dao.ServiceOrderMapper;
 import com.ndjk.cl.brandservice.model.BrandService;
 import com.ndjk.cl.brandservice.model.OrderService;
+import com.ndjk.cl.brandservice.model.OrderServicePackage;
 import com.ndjk.cl.brandservice.model.ServiceOrder;
+import com.ndjk.cl.brandservice.model.dto.ApiApplyServiceQueryModel;
 import com.ndjk.cl.brandservice.model.resp.ApplyServiceListModel;
 import com.ndjk.cl.brandservice.service.BrandOrderServiceService;
 import com.ndjk.cl.brandservice.service.BrandServiceOrderService;
@@ -27,10 +29,6 @@ public class BrandServiceOrderServiceImpl implements BrandServiceOrderService{
 
     @Autowired
     private ServiceOrderMapper serviceOrderMapper;
-    @Autowired
-    private BrandOrderServiceService brandOrderServiceService;
-    @Autowired
-    private BrandServiceService brandServiceService;
     /**
      * 新增订单 返回订单id
      * @param serviceOrder
@@ -47,30 +45,28 @@ public class BrandServiceOrderServiceImpl implements BrandServiceOrderService{
      */
     public List<ApplyServiceListModel> selectByKgId(int kgId){
         //查询用户所有的订单
-        List<ServiceOrder> serviceOrderList = this.serviceOrderMapper.selectListByKgId(kgId);
-        if(serviceOrderList == null || serviceOrderList.size() < 1){
+        List<ApiApplyServiceQueryModel> apiApplyServiceModels = this.serviceOrderMapper.selectApplyListByKgId(kgId);
+        if(apiApplyServiceModels == null || apiApplyServiceModels.size() < 1){
             return null;
         }
         List<ApplyServiceListModel> selectApplyServiceListRespModels = new ArrayList<>();
-        for(ServiceOrder serviceOrder:serviceOrderList) {
+        for(ApiApplyServiceQueryModel apiApplyServiceQueryModel:apiApplyServiceModels) {
             //构造订单信息返回参数
             ApplyServiceListModel selectApplyServiceListRespModel =
-                    new ApplyServiceListModel(serviceOrder.getActivityName(),
-                            serviceOrder.getCreateTime(),String.valueOf(serviceOrder.getState()));
+                    new ApplyServiceListModel(apiApplyServiceQueryModel.getActivityName(),
+                            apiApplyServiceQueryModel.getCreateTime(),String.valueOf(apiApplyServiceQueryModel.getState()));
 
-
-            List<OrderService> orderServices = this.brandOrderServiceService.selectListByOrderId(serviceOrder.getId());
-            if(orderServices == null || orderServices.size()<1){
-                logger.info("订单"+serviceOrder.getId()+"服务为null");
+            List<BrandService> brandServices =apiApplyServiceQueryModel.getBrandServiceList();
+            if(brandServices == null || brandServices.size()<1){
+                logger.info("订单"+apiApplyServiceQueryModel.getId()+"服务为null");
             }
             StringBuffer sb = new StringBuffer();
-            for(OrderService orderService:orderServices){
+            for(BrandService brandService:brandServices){
                 //构造订单服务信息
 
-                BrandService brandService = this.brandServiceService.selectById(orderService.getServiceId());
                 sb.append(brandService.getName());
                 sb.append("*");
-                sb.append(orderService.getCount());
+                sb.append(brandService.getCount());
                 sb.append(",");
             }
             sb.deleteCharAt(sb.length()-1);
@@ -78,6 +74,23 @@ public class BrandServiceOrderServiceImpl implements BrandServiceOrderService{
             selectApplyServiceListRespModels.add(selectApplyServiceListRespModel);
         }
         return selectApplyServiceListRespModels;
+    }
+
+    /**
+     * 通过订单id查询服务列表
+     * @param orderId
+     * @return
+     */
+    @Override
+    public OrderServicePackage.Order selectServiceByOrderId(Integer orderId) {
+        //订单信息
+        ServiceOrder serviceOrder = serviceOrderMapper.selectByPrimaryKey(orderId);
+        //订单服务数据包
+        OrderServicePackage.Order order = new OrderServicePackage.Order();
+        order.setOrderId(serviceOrder.getId());
+        order.setOrderNo(serviceOrder.getOrderNo());
+        order.setOrderServiceList(this.serviceOrderMapper.selectServiceByOrderId(orderId));
+        return order;
     }
 
     /**

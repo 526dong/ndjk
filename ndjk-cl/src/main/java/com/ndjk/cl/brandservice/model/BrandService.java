@@ -16,6 +16,11 @@ public class BrandService implements Serializable{
 
     private BigDecimal price;
 
+    /**
+     * 数量
+     */
+    private Integer count;
+
     private Date createTime;
 
     private Date updateTime;
@@ -65,6 +70,14 @@ public class BrandService implements Serializable{
         this.price = price;
     }
 
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -88,4 +101,5 @@ public class BrandService implements Serializable{
     public void setStatus(Integer status) {
         this.status = status;
     }
+
 }

@@ -129,7 +129,7 @@
         kg_name = #{kgName,jdbcType=VARCHAR}
       </if>
       <if test="status != null" >
-       and status = #{status,jdbcType=INTEGER},
+       and status = #{status,jdbcType=INTEGER}
       </if>
     </where>
   </select>

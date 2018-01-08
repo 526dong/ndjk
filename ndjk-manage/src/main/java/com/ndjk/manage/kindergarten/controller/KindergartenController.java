@@ -3,6 +3,7 @@ package com.ndjk.manage.kindergarten.controller;
 import com.ndjk.cl.brandservice.model.Kindergarten;
 import com.ndjk.cl.brandservice.model.resp.JsonResult;
 import com.ndjk.cl.brandservice.service.KindergartenService;
+import com.ndjk.manage.aspect.Record;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Created by xzd on 2018/1/2.
  * @Description 幼儿园
+ * @author Created by xzd on 2018/1/2.
  */
 @Controller
 @RequestMapping(value = "/manage/kindergarten")
