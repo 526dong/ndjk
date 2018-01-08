@@ -54,7 +54,7 @@ public class OperateRecordUtils {
             //操作人
             //operateRecord.setOperator(user.getLoginName());
             //操作类型
-            operateRecord.setOperateContent(operateType);
+            operateRecord.setOperateType(operateType);
             //操作人ip
             //operateRecord.setOperateIp(user.getLoginIp());
             //操作请求路径

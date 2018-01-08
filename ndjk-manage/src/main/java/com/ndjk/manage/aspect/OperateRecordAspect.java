@@ -15,7 +15,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-
 /**
  * 用于记录所有系统操作的切面类
  * @author Created by xzd on 2018/1/7
@@ -28,7 +27,7 @@ public class OperateRecordAspect {
     private OperateRecordService operateRecordService;
 
     //controller切点层-manage所有子包里的Controller类的任意方法的执行
-    @Pointcut("execution(* com.ndjk.manage.*.controller.*Controller.*(..))")
+    @Pointcut("execution(* com.ndjk.manage.kindergarten.controller.KindergartenController.*(..))")
     public void controllerAspect() {
     }
 

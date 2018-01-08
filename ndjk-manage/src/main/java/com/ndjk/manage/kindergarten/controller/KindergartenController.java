@@ -36,6 +36,7 @@ public class KindergartenController {
      * @return object
      */
     @RequestMapping(value = "/findAll", method = RequestMethod.POST)
+    @Record(operateType="查询幼儿园列表")
     @ResponseBody
     public JsonResult findAll(HttpServletRequest request) {
         //查询条件

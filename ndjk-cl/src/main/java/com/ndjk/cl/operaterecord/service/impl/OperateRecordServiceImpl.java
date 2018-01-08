@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * @author xzd
  */
-@Service
+@Service("operateRecordService")
 public class OperateRecordServiceImpl implements OperateRecordService {	
 	@Autowired
 	private OperateRecordMapper operateRecordMapper;
