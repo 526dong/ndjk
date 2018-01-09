@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+	  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+	  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<context id="MysqlTables" targetRuntime="MyBatis3">
+		<property name="javaFileEncoding" value="UTF-8"/>
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!-- mysql相关配置 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://119.23.26.246:3306/ndjk?useUnicode=true&amp;characterEncoding=UTF-8"
+			userId="ndjk" password="ndjk.123456">
+		</jdbcConnection>
+
+		<!-- 是否忽略BigDecimals 非必填项 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- java类 -->
+		<javaModelGenerator targetPackage="com.ndjk.cl.utils.generator.gen"
+			targetProject="ndjk-cl\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+			<property name="constructorBased" value="false"/>
+		</javaModelGenerator>
+
+		<!-- *Mapper.xml生成的位置 -->
+		<sqlMapGenerator targetPackage="com.ndjk.cl.utils.generator.gen"
+			targetProject="ndjk-cl\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- java mapper类(interface) -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.ndjk.cl.utils.generator.gen" targetProject="ndjk-cl\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- 指定表格 -->
+		<table tableName="nd_product" domainObjectName="NdProduct"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+			<!-- 是否开始驼峰 -->
+			<property name="useActualColumnNames" value="false" />
+			<property name="commentGenerator" value="true" />
+			<!--主键 -->
+			<generatedKey column="id" sqlStatement="MySql" identity="true" /> 
+			
+		</table>
+	</context>
+</generatorConfiguration>
+
