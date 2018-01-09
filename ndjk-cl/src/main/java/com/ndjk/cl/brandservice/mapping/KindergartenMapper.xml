@@ -141,7 +141,8 @@
     where login_name = #{loginName,jdbcType=VARCHAR}
   </select>
 
-  <select id="selectListByNameAndState" resultMap="BaseResultMap" parameterType="com.ndjk.cl.brandservice.model.searchModel.SearchKindergartensModel">
+  <select id="selectKindergartenList" resultMap="BaseResultMap"
+          parameterType="com.ndjk.cl.brandservice.model.searchModel.SearchKindergartensModel">
     select
     <include refid="Base_Column_List" />
     from kindergarten
