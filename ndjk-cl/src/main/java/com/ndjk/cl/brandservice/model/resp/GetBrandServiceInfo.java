@@ -11,10 +11,6 @@ public class GetBrandServiceInfo implements Serializable {
 
     private String url; //图片链接url
 
-    private int type;  //类型 1免费 2 付费
-
-    private int id;    //服务id
-
     public GetBrandServiceInfo() {
     }
 
@@ -37,21 +33,5 @@ public class GetBrandServiceInfo implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

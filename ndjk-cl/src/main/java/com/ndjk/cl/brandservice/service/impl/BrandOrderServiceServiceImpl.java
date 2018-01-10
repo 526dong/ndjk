@@ -32,4 +32,14 @@ public class BrandOrderServiceServiceImpl implements BrandOrderServiceService {
     public void deleteRelateByOrderId(Integer orderId) {
         this.orderServiceMapper.deleteRelateByOrderId(orderId);
     }
+
+    /**
+     * 根据订单id 查询服务列表
+     * @param orderId
+     * @return
+     */
+    @Override
+    public List<OrderService> selectListByOrderId(int orderId){
+        return this.orderServiceMapper.selectListByOrderId(orderId);
+    }
 }

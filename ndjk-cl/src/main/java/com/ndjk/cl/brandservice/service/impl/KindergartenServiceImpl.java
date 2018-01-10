@@ -6,6 +6,7 @@ import com.ndjk.cl.brandservice.model.resp.JsonResult;
 import com.ndjk.cl.brandservice.model.searchModel.SearchKindergartensModel;
 import com.ndjk.cl.brandservice.service.KindergartenService;
 import com.ndjk.cl.utils.RdPage;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,13 +60,15 @@ public class KindergartenServiceImpl implements KindergartenService{
      * @param state
      * @return
      */
-    public JsonResult selectListByNameAndState(String kgName, String state,int page,int size){
+    public JsonResult selectListByNameAndState(String kgName, String state, int page, int size){
 
         List<Kindergarten> kindergartens= this.kindergartenMapper.selectListByNameAndState(kgName,state);
         RdPage rdPage = new RdPage(kindergartens.size(),page,size);
         SearchKindergartensModel searchKindergartensModel = new SearchKindergartensModel(page, size);
-        searchKindergartensModel.setName(kgName);
-        searchKindergartensModel.setState(Integer.valueOf(state));
+        searchKindergartensModel.setKgName(kgName);
+        if(StringUtils.isNotBlank(state)){
+            searchKindergartensModel.setStatus(Integer.valueOf(state));
+        }
         List<Kindergarten> kindergartenList = this.kindergartenMapper.selectKindergartenList(searchKindergartensModel);
         JsonResult jsonResult = new JsonResult();
         jsonResult.setData(kindergartenList);

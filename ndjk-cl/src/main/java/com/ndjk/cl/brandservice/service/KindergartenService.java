@@ -40,8 +40,7 @@ public interface KindergartenService {
      * @param state
      * @return
      */
-    JsonResult selectListByNameAndState(String kgName, String state,int page,int size);
-
+    JsonResult selectListByNameAndState(String kgName, String state, int page, int size);
     /**
      * 基本查询
      * @param id
