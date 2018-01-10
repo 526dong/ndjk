@@ -69,7 +69,7 @@
 		</property>
 	</bean>
 
-	<!--<mvc:annotation-driven conversion-service="conversionService">
+	<mvc:annotation-driven conversion-service="conversionService">
 		<mvc:message-converters>
 			<bean
 				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
@@ -80,24 +80,19 @@
 								<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
 							</bean>
 						</property>
-
-						&lt;!&ndash; 为null字段时不显示 &ndash;&gt;
-						&lt;!&ndash;<property name="serializationInclusion">
-							<value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
-						</property>&ndash;&gt;
 					</bean>
 				</property>
 			</bean>
 		</mvc:message-converters>
-	</mvc:annotation-driven>-->
+	</mvc:annotation-driven>
 	
 	<!-- 转换器配置 -->
-	<!--<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<set>
-				<bean class="com.microdreams.converter.DateConverter"/>
+				<bean class="com.ndjk.cl.utils.DateConverter"/>
 			</set>
 		</property>
-	</bean>-->
+	</bean>
 
 </beans>
