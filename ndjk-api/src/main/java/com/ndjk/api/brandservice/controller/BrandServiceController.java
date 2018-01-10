@@ -94,13 +94,39 @@ public class BrandServiceController {
     }
 
     /**
+     * 登录
+     * @param account 账号
+     * @param password 密码
+     * @param code 验证码
+     * @return
+     */
+    @RequestMapping(value = "/brandservice/login")
+    @ResponseBody
+    public Object login(String account,String password,String code){
+        Kindergarten kindergarten = this.kindergartenService.selectByLoginName(account);
+        if(kindergarten == null){
+            return new BaseResponseModel(400,"账号或密码错误");
+        }
+        if(kindergarten.getStatus() != 1){
+            return new BaseResponseModel(400,"账号或密码错误");
+        }
+        if(!password.equals(kindergarten.getPassword())){
+            return new BaseResponseModel(400,"账号或密码错误");
+        }
+        if(!code.equals("123456")){
+            return new BaseResponseModel(400,"账号或密码错误");
+        }
+        return new LoginRespModel(200,"登录成功",kindergarten.getId());
+    }
+
+    /**
      * 查询服务列表
      * @param type
      * @return
      */
     @RequestMapping(value = "/brandservice/getservicelist")
     @ResponseBody
-    public Object getservicelist(Integer type){
+    public Object getservicelist(int type){
         List<BrandService> brandServices = this.brandServiceService.selectByType(type);
         if(brandServices ==null || brandServices.size()<1){
             return new GetBrandServiceListRespModel(400,"服务列表为空");
@@ -109,8 +135,6 @@ public class BrandServiceController {
         for(BrandService brandService:brandServices){
             GetBrandServiceInfo getBrandServiceInfo =
                     new GetBrandServiceInfo(brandService.getName(),brandService.getImageurl());
-            getBrandServiceInfo.setId(brandService.getId());
-            getBrandServiceInfo.setType(brandService.getType());
             getBrandServiceInfos.add(getBrandServiceInfo);
         }
         return new GetBrandServiceListRespModel(200,"操作成功",getBrandServiceInfos);
@@ -132,7 +156,21 @@ public class BrandServiceController {
         return new ApplyServiceListRespModel(200,"操作成功",selectApplyServiceListRespModels);
     }
 
-
+    /**
+     * 修改密码
+     * @param updatePwReq
+     * @return
+     */
+    @RequestMapping(value = "/brandservice/updatepassword")
+    @ResponseBody
+    public Object updatepassword(UpdatePwReq updatePwReq) {
+        String result = this.kindergartenService.updatePassWord(updatePwReq.getKgId(),
+                updatePwReq.getOldPassword(),updatePwReq.getNewPassword());
+        if(result == null){
+            return  new BaseResponseModel(200,"操作成功");
+        }
+        return new BaseResponseModel(400,result);
+    }
 
     /**
      * 生成15位流水号(同一秒钟可生成160万个不重复的流水号)

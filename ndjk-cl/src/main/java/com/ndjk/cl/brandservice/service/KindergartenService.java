@@ -1,7 +1,6 @@
 package com.ndjk.cl.brandservice.service;
 
 import com.ndjk.cl.brandservice.model.Kindergarten;
-import com.ndjk.cl.brandservice.model.resp.JsonResult;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,7 +39,7 @@ public interface KindergartenService {
      * @param state
      * @return
      */
-    JsonResult selectListByNameAndState(String kgName, String state,int page,int size);
+    List<Kindergarten> selectListByNameAndState(String kgName,String state);
 
     /**
      * 基本查询

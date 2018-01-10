@@ -16,5 +16,7 @@
 
 	<!-- aspectj aop启用CGliB代理 -->
 	<aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true"/>
+
+	<bean id="logAspectBean" class="com.ndjk.manage.aspect.OperateRecordAspect"></bean>
 	
 </beans>

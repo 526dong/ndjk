@@ -8,7 +8,6 @@ import com.ndjk.cl.brandservice.service.BrandServiceService;
 import com.ndjk.cl.brandservice.service.KindergartenService;
 import com.ndjk.cl.utils.ControllerUtil;
 import com.ndjk.cl.utils.MyRuntimeException;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,14 +68,13 @@ public class BrandServiceController {
     @RequestMapping(value = "/addkgacount", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult addkgacount(Kindergarten kindergarten) {
-        if(StringUtils.isBlank(kindergarten.getAccount()) || StringUtils.isBlank(kindergarten.getKgName())
-                || StringUtils.isBlank(kindergarten.getPassword())){
-            return JsonResult.error(400,"缺少必要参数");
+        //处理新增账号中account属性
+        String account = kindergarten.getAccount();
+        if (account != null && !"".equals(account)) {
+            kindergarten.setLoginName(account);
         }
-        kindergarten.setLoginName(kindergarten.getAccount());
         //创建时间
         kindergarten.setCreateTime(new Date());
-        kindergarten.setStatus(1);
         try {
             kindergartenService.insertSelective(kindergarten);
             return JsonResult.ok("保存成功");
@@ -94,9 +92,11 @@ public class BrandServiceController {
     @RequestMapping(value = "/selectOrderService", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult selectOrderService(@RequestParam(required = true) Integer orderId) {
+        //订单服务数据包
+        OrderServicePackage.Order orderEntity = new OrderServicePackage.Order();
         try {
             //通过订单id查询订单服务信息
-            OrderServicePackage.Order orderEntity = serviceOrderService.selectServiceByOrderId(orderId);
+            orderEntity = serviceOrderService.selectServiceByOrderId(orderId);
             return JsonResult.ok(orderEntity, "订单服务列表查询成功");
         } catch (Exception e) {
             logger.error("品牌服务模块报错：订单服务列表查询异常!", e);

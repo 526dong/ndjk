@@ -32,7 +32,7 @@ public class OperateRecordController {
 	 * 查询日志列表
 	 * @return
 	 */
-	@RequestMapping(value = "/record/findAll")
+	@RequestMapping(value = "/record/findAll", method = RequestMethod.GET)
 	@Record(operateType="查询操作日志列表")
 	@ResponseBody
 	public JsonResult findAllRecord(HttpServletRequest request){

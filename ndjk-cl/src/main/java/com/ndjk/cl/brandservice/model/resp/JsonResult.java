@@ -1,7 +1,5 @@
 package com.ndjk.cl.brandservice.model.resp;
 
-import com.ndjk.cl.utils.RdPage;
-
 import java.io.Serializable;
 
 /**
@@ -16,8 +14,6 @@ public class JsonResult implements Serializable{
     private Object data;
 
     private String message;
-
-    private RdPage page;
 
     public JsonResult() {
     }
@@ -88,13 +84,5 @@ public class JsonResult implements Serializable{
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public RdPage getPage() {
-        return page;
-    }
-
-    public void setPage(RdPage page) {
-        this.page = page;
     }
 }
