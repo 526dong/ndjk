@@ -140,4 +140,22 @@
     from kindergarten
     where login_name = #{loginName,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectKindergartenList" resultMap="BaseResultMap"
+          parameterType="com.ndjk.cl.brandservice.model.searchModel.SearchKindergartensModel">
+    select
+    <include refid="Base_Column_List" />
+    from kindergarten
+    <where>
+      <if test="kgName != null and kgName !=''" >
+        kg_name = #{kgName,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null and status != 0" >
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+    <if test="beginPage != null and pageSize != null">
+      limit ${beginPage},${pageSize}
+    </if>
+  </select>
 </mapper>

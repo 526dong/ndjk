@@ -35,22 +35,13 @@ public class KindergartenController {
      * @param request
      * @return object
      */
-    @RequestMapping(value = "/findAll", method = RequestMethod.POST)
-    @Record(operateType="查询幼儿园列表")
+    @RequestMapping(value = "/findAll")
     @ResponseBody
-    public JsonResult findAll(HttpServletRequest request) {
+    public JsonResult findAll(HttpServletRequest request,int page,int size) {
         //查询条件
         String name = request.getParameter("name");
         String state = request.getParameter("state");
-        List<Kindergarten> kindergartens = new ArrayList<>();
-        try {
-            //通过姓名和状态进行幼儿园列表查询
-            kindergartens = kindergartenService.selectListByNameAndState(name, state);
-            return JsonResult.ok(kindergartens, "幼儿园列表查询成功");
-        } catch (Exception e) {
-            logger.error("幼儿园模块报错：幼儿园列表查询异常!", e);
-            return JsonResult.error(400, "幼儿园列表查询失败");
-        }
+        return kindergartenService.selectListByNameAndState(name,state,page,size);
     }
 
     /**
@@ -58,7 +49,7 @@ public class KindergartenController {
      * @param kindergarten
      * @return
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add")
     @ResponseBody
     public JsonResult add(Kindergarten kindergarten) {
         //创建时间
@@ -77,7 +68,7 @@ public class KindergartenController {
      * @param kindergarten
      * @return
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update")
     @ResponseBody
     public JsonResult update(Kindergarten kindergarten) {
         //更新时间
@@ -96,7 +87,7 @@ public class KindergartenController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete")
     @ResponseBody
     public JsonResult delete(@RequestParam Integer id) {
         try {
@@ -113,7 +104,7 @@ public class KindergartenController {
      * @param kindergarten
      * @return
      */
-    @RequestMapping(value = "/resetPwd", method = RequestMethod.POST)
+    @RequestMapping(value = "/resetPwd")
     @ResponseBody
     public JsonResult resetPwd(Kindergarten kindergarten) {
         try {
