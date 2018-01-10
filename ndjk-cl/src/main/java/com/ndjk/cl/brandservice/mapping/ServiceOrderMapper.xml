@@ -20,8 +20,8 @@
              type="com.ndjk.cl.brandservice.model.dto.ApiApplyServiceQueryModel"
              extends="BaseResultMap">
     <collection property="brandServiceList"
-                select="com.ndjk.cl.brandservice.dao.BrandServiceMapper.selectByKgId"
-                column="kg_id" />
+                select="com.ndjk.cl.brandservice.dao.BrandServiceMapper.selectByOrderId"
+                column="id" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, kg_id, apply_name, `work`, phone, activity_name, order_no, state, is_shipping, price,

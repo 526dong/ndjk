@@ -1,6 +1,7 @@
 package com.ndjk.cl.brandservice.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
+import com.ndjk.cl.Goods.model.GoodsCategory;
 import com.ndjk.cl.brandservice.dao.BrandServiceMapper;
 import com.ndjk.cl.brandservice.model.BrandService;
 import com.ndjk.cl.brandservice.model.OrderService;
@@ -125,4 +126,18 @@ public class BrandServiceServiceImpl implements BrandServiceService{
         return this.brandServiceMapper.selectByPrimaryKey(id);
     }
 
+    /**
+     * 排序
+     * @param idStr 逗号隔开的字符串
+     */
+    public void sortBrandServcie(String idStr){
+        List<BrandService> brandServiceList = new ArrayList<>();
+        String[] ids = idStr.split(",");
+        for(int i=0;i<ids.length;i++){
+            BrandService brandService = new BrandService();
+            brandService.setId(Integer.valueOf(ids[i]));
+            brandService.setSort(i+1);
+            this.brandServiceMapper.updateByPrimaryKey(brandService);
+        }
+    }
 }

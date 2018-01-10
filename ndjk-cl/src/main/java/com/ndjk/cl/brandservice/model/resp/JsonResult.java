@@ -15,7 +15,7 @@ public class JsonResult implements Serializable{
 
     private Object data;
 
-    private String message;
+    private String msg;
 
     private RdPage page;
 
@@ -26,9 +26,9 @@ public class JsonResult implements Serializable{
         this.code = code;
     }
 
-    public JsonResult(Integer code, String message) {
+    public JsonResult(Integer code, String msg) {
         this.code = code;
-        this.message = message;
+        this.msg = msg;
     }
 
     public JsonResult(Integer code, Object data) {
@@ -36,10 +36,10 @@ public class JsonResult implements Serializable{
         this.data = data;
     }
 
-    public JsonResult(Integer code, Object data, String message) {
+    public JsonResult(Integer code, Object data, String msg) {
         this.code = code;
         this.data = data;
-        this.message = message;
+        this.msg = msg;
     }
 
     public static JsonResult ok() {
@@ -82,12 +82,12 @@ public class JsonResult implements Serializable{
         this.data = data;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public RdPage getPage() {

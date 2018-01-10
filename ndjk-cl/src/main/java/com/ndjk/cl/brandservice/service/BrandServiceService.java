@@ -47,4 +47,10 @@ public interface BrandServiceService {
      * @return
      */
     BrandService selectById(int id);
+
+    /**
+     * 排序
+     * @param idStr 逗号隔开的字符串
+     */
+    void sortBrandServcie(String idStr);
 }

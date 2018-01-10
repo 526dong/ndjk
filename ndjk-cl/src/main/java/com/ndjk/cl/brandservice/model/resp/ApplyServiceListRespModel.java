@@ -1,6 +1,7 @@
 package com.ndjk.cl.brandservice.model.resp;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ public class ApplyServiceListRespModel extends BaseResponseModel implements Seri
 
     public ApplyServiceListRespModel(Integer code, String message) {
         super(code, message);
+        this.data = new ArrayList<>();
     }
 
     public ApplyServiceListRespModel(Integer code, String message, List<ApplyServiceListModel> data) {

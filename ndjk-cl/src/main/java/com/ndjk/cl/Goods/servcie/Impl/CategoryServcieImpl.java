@@ -3,6 +3,7 @@ package com.ndjk.cl.Goods.servcie.Impl;
 import com.ndjk.cl.Goods.dao.GoodsCategoryMapper;
 import com.ndjk.cl.Goods.model.GoodsCategory;
 import com.ndjk.cl.Goods.servcie.CategoryServcie;
+import com.ndjk.cl.brandservice.model.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,25 +54,12 @@ public class CategoryServcieImpl implements CategoryServcie{
      * @param idStr 逗号隔开的字符串
      */
     public void sortCategoryServcie(String idStr){
-        if(idStr == null || "".equals(idStr)){
-            return;
-        }
-        List<GoodsCategory> goodsCategoryList = new ArrayList<>();
         String[] ids = idStr.split(",");
         for(int i=0;i<ids.length;i++){
-            GoodsCategory goodsCategory = this.goodsCategoryMapper.selectByPrimaryKey(Integer.valueOf(ids[i]));
-            if(goodsCategory != null){
-                goodsCategoryList.add(goodsCategory);
-            }
-        }
-        //便利list 重新给sort字段赋值  从小到大
-        if(goodsCategoryList == null || goodsCategoryList.size() <=0){
-            return;
-        }
-        int i = 1;
-        for(GoodsCategory goodsCategory:goodsCategoryList){
-            goodsCategory.setSort(1);
-            i++;
+            GoodsCategory goodsCategory = new GoodsCategory();
+            goodsCategory.setId(Integer.valueOf(ids[i]));
+            goodsCategory.setSort(i+1);
+            this.goodsCategoryMapper.updateByPrimaryKey(goodsCategory);
         }
     }
 }

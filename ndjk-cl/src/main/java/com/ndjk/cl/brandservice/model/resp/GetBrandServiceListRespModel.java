@@ -1,6 +1,7 @@
 package com.ndjk.cl.brandservice.model.resp;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class GetBrandServiceListRespModel extends BaseResponseModel implements S
 
     public GetBrandServiceListRespModel(Integer code, String message) {
         super(code, message);
+        this.data = new ArrayList<>();
     }
 
     public GetBrandServiceListRespModel(Integer code, String message, List<GetBrandServiceInfo> data) {

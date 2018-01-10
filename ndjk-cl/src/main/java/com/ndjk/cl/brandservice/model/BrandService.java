@@ -27,6 +27,8 @@ public class BrandService implements Serializable{
 
     private Integer status;
 
+    private Integer sort;
+
     public BrandService() {
     }
 
@@ -102,4 +104,11 @@ public class BrandService implements Serializable{
         this.status = status;
     }
 
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
 }
