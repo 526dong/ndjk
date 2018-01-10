@@ -37,11 +37,19 @@ public class KindergartenController {
      */
     @RequestMapping(value = "/findAll", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResult findAll(HttpServletRequest request,int page,int size) {
+    public JsonResult findAll(HttpServletRequest request) {
         //查询条件
         String name = request.getParameter("name");
         String state = request.getParameter("state");
-        return kindergartenService.selectListByNameAndState(name,state,page,size);
+        List<Kindergarten> kindergartens = new ArrayList<>();
+        try {
+            //通过姓名和状态进行幼儿园列表查询
+            kindergartens = kindergartenService.selectListByNameAndState(name, state);
+            return JsonResult.ok(kindergartens, "幼儿园列表查询成功");
+        } catch (Exception e) {
+            logger.error("幼儿园模块报错：幼儿园列表查询异常!", e);
+            return JsonResult.error(400, "幼儿园列表查询失败");
+        }
     }
 
     /**

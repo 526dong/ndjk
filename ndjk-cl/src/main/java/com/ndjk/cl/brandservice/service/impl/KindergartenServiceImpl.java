@@ -67,10 +67,9 @@ public class KindergartenServiceImpl implements KindergartenService{
         searchKindergartensModel.setName(kgName);
         searchKindergartensModel.setState(Integer.valueOf(state));
         List<Kindergarten> kindergartenList = this.kindergartenMapper.selectKindergartenList(searchKindergartensModel);
-        JsonResult jsonResult = new JsonResult(200,"操作成功");
+        JsonResult jsonResult = new JsonResult();
         jsonResult.setData(kindergartenList);
-        jsonResult.setPage(rdPage);
-        return jsonResult;
+        return null;
     }
 
     /**
