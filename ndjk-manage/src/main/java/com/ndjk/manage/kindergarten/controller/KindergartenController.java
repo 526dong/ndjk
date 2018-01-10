@@ -35,7 +35,7 @@ public class KindergartenController {
      * @param request
      * @return object
      */
-    @RequestMapping(value = "/findAll", method = RequestMethod.POST)
+    @RequestMapping(value = "/findAll")
     @ResponseBody
     public JsonResult findAll(HttpServletRequest request,int page,int size) {
         //查询条件
@@ -49,7 +49,7 @@ public class KindergartenController {
      * @param kindergarten
      * @return
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add")
     @ResponseBody
     public JsonResult add(Kindergarten kindergarten) {
         //创建时间
@@ -68,7 +68,7 @@ public class KindergartenController {
      * @param kindergarten
      * @return
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update")
     @ResponseBody
     public JsonResult update(Kindergarten kindergarten) {
         //更新时间
@@ -87,7 +87,7 @@ public class KindergartenController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete")
     @ResponseBody
     public JsonResult delete(@RequestParam Integer id) {
         try {
@@ -104,7 +104,7 @@ public class KindergartenController {
      * @param kindergarten
      * @return
      */
-    @RequestMapping(value = "/resetPwd", method = RequestMethod.POST)
+    @RequestMapping(value = "/resetPwd")
     @ResponseBody
     public JsonResult resetPwd(Kindergarten kindergarten) {
         try {

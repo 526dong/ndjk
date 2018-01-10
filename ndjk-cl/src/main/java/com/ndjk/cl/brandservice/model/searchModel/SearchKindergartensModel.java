@@ -10,26 +10,26 @@ import java.io.Serializable;
  */
 public class SearchKindergartensModel extends PageUtil implements Serializable{
 
-    private String name;
-    private int state;
+    private String kgName;
+    private int status;
 
     public SearchKindergartensModel(int page, int size) {
         super(page, size);
     }
 
-    public String getName() {
-        return name;
+    public String getKgName() {
+        return kgName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setKgName(String kgName) {
+        this.kgName = kgName;
     }
 
-    public int getState() {
-        return state;
+    public int getStatus() {
+        return status;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
