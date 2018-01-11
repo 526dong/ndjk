@@ -44,14 +44,19 @@ public class BrandServiceController {
      * @param request
      * @return object
      */
-    @RequestMapping(value = "/searchservicelist", method = RequestMethod.POST)
+    @RequestMapping(value = "/searchservicelist")
     @ResponseBody
-    public JsonResult searchservicelist(HttpServletRequest request) {
+    public JsonResult searchservicelist(HttpServletRequest request,int page,int size) {
         //查询条件-参数集合
         Map<String, Object> params = ControllerUtil.requestMap(request);
         //尽量初始化集合大小
         List<Map<String, Object>> serviceOrders = new ArrayList<>(10000);
         try {
+            //查询总数
+
+            //查询分页后数据
+            params.put("beginPage",(page-1)*size);
+            params.put("size",size);
             serviceOrders = serviceOrderService.selectList(params);
             return JsonResult.ok(serviceOrders, "服务列表查询成功");
         } catch (Exception e) {
@@ -65,7 +70,7 @@ public class BrandServiceController {
      * @param kindergarten
      * @return
      */
-    @RequestMapping(value = "/addkgacount", method = RequestMethod.POST)
+    @RequestMapping(value = "/addkgacount")
     @ResponseBody
     public JsonResult addkgacount(Kindergarten kindergarten) {
         //处理新增账号中account属性
@@ -89,7 +94,7 @@ public class BrandServiceController {
      * @param orderId
      * @return
      */
-    @RequestMapping(value = "/selectOrderService", method = RequestMethod.POST)
+    @RequestMapping(value = "/selectOrderService")
     @ResponseBody
     public JsonResult selectOrderService(@RequestParam(required = true) Integer orderId) {
         //订单服务数据包
@@ -110,7 +115,7 @@ public class BrandServiceController {
      * @param priceJsonStr
      * @return
      */
-    @RequestMapping(value = "/accept", method = RequestMethod.POST)
+    @RequestMapping(value = "/accept")
     @ResponseBody
     public JsonResult accept(@RequestParam(required = true) Integer orderId, String priceJsonStr) {
         try {
@@ -133,7 +138,7 @@ public class BrandServiceController {
      * @param couNo
      * @return
      */
-    @RequestMapping(value = "/delivery", method = RequestMethod.POST)
+    @RequestMapping(value = "/delivery")
     @ResponseBody
     public JsonResult delivery(@RequestParam(required = true) Integer orderId, String courier, String couNo) {
         try {
@@ -149,7 +154,7 @@ public class BrandServiceController {
      * @param orderId
      * @return
      */
-    @RequestMapping(value = "/checklogistics", method = RequestMethod.POST)
+    @RequestMapping(value = "/checklogistics")
     @ResponseBody
     public JsonResult checklogistics(@RequestParam(required = true) Integer orderId) {
         try {

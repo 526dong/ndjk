@@ -102,4 +102,12 @@ public class BrandServiceOrderServiceImpl implements BrandServiceOrderService{
         return this.serviceOrderMapper.selectList(params);
     }
 
+    /**
+     * 查询服务列表总数
+     * @Author: zfw
+     * @since: 2018/1/11  15:41
+     */
+    public Integer selectListCOunt(Map<String, Object> params){
+        return 0;
+    }
 }

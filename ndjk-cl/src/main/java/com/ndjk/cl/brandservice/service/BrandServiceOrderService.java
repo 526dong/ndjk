@@ -40,4 +40,11 @@ public interface BrandServiceOrderService {
      * @return
      */
     List<Map<String, Object>> selectList(Map<String, Object> params);
+
+    /**
+     * 查询服务列表总数
+     * @Author: zfw
+     * @since: 2018/1/11  15:41
+     */
+    Integer selectListCOunt(Map<String, Object> params);
 }
