@@ -29,6 +29,7 @@ public class LoginController {
     private KindergartenService kindergartenService;
     /**
      * 登录
+     * TODO user信息存session
      * @param account 账号
      * @param password 密码
      * @param code 验证码
