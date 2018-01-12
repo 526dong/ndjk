@@ -40,4 +40,6 @@ public interface SysAppConfigService {
 
     SysAppConfig findByStatusAndType(Map<String, Object> configMap);
 
+    List<SysAppConfig> listByCode(String code);
+
 }

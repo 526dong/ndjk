@@ -61,4 +61,12 @@ public interface SysAppConfigMapper {
     SysAppConfig findByStatusAndType(Map<String, Object> configMap);
 
     int updateSelective(Map<String, Object> param);
+    /**
+     * @Author: wl
+     * @Description: 模糊查询通过code
+     * @Date: 2018/1/8  15:50
+     *
+     */
+    List<SysAppConfig> listByCode(String code);
+
 }
