@@ -58,8 +58,9 @@ public class BrandInteractionController {
         int insert = thumbsViewService.insert(thumbsViewDetail);
         if (insert > 0) {
             //点赞总表点赞数加1
-            thumbsViewListService.findSelective()
-            thumbsViewListService.updateByPrimaryKeySelective()
+            ThumbsViewList selective = thumbsViewListService.findSelective(thumbsViewDetail.getThumbsId());
+            selective.setThumbsNum(selective.getThumbsNum()+1);
+            thumbsViewListService.updateByPrimaryKeySelective(selective);
             return JsonResult.ok(insert, "插入成功");
         }
         return JsonResult.error(400, "插入失败");

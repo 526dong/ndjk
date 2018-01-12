@@ -8,7 +8,7 @@
       This element was generated on Fri Jan 12 16:09:45 CST 2018.
     -->
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="thumbs_id" property="thumbsId" jdbcType="INTEGER" />
+    <result column="thumbs_id" property="thumbsId" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="openid" property="openid" jdbcType="VARCHAR" />
     <result column="ip" property="ip" jdbcType="VARCHAR" />
@@ -51,7 +51,7 @@
     insert into nd_thumbs_view_detail (id, thumbs_id, user_id, 
       openid, ip, create_time
       )
-    values (#{id,jdbcType=BIGINT}, #{thumbsId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=BIGINT}, #{thumbsId,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER},
       #{openid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -87,7 +87,7 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="thumbsId != null" >
-        #{thumbsId,jdbcType=INTEGER},
+        #{thumbsId,jdbcType=BIGINT},
       </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
@@ -112,7 +112,7 @@
     update nd_thumbs_view_detail
     <set >
       <if test="thumbsId != null" >
-        thumbs_id = #{thumbsId,jdbcType=INTEGER},
+        thumbs_id = #{thumbsId,jdbcType=BIGINT},
       </if>
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
@@ -136,7 +136,7 @@
       This element was generated on Fri Jan 12 16:09:45 CST 2018.
     -->
     update nd_thumbs_view_detail
-    set thumbs_id = #{thumbsId,jdbcType=INTEGER},
+    set thumbs_id = #{thumbsId,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=INTEGER},
       openid = #{openid,jdbcType=VARCHAR},
       ip = #{ip,jdbcType=VARCHAR},
