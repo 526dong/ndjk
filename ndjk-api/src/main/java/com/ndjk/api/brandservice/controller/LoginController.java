@@ -29,7 +29,6 @@ public class LoginController {
     private KindergartenService kindergartenService;
     /**
      * 登录
-     * TODO user信息存session
      * @param account 账号
      * @param password 密码
      * @param code 验证码
@@ -37,20 +36,22 @@ public class LoginController {
      */
     @RequestMapping(value = "/brandservice/login")
     @ResponseBody
-    public Object login(String account,String password,String code){
+    public Object login(HttpSession session,String account,String password,String code){
         Kindergarten kindergarten = this.kindergartenService.selectByLoginName(account);
         if(kindergarten == null){
             return new BaseResponseModel(400,"账号或密码错误");
         }
         if(kindergarten.getStatus() != 1){
-            return new BaseResponseModel(400,"账号或密码错误");
+            return new BaseResponseModel(400,"该账号已冻结");
         }
         if(!password.equals(kindergarten.getPassword())){
             return new BaseResponseModel(400,"账号或密码错误");
         }
-        if(!code.equals("123456")){
-            return new BaseResponseModel(400,"账号或密码错误");
+        String imgcode = String.valueOf(session.getAttribute("imgcode"));
+        if(!imgcode.equals(code)){
+            return new BaseResponseModel(400,"验证码错误");
         }
+        session.setAttribute("kindergarten",kindergarten);
         return new LoginRespModel(200,"登录成功",kindergarten.getId());
     }
 
@@ -75,7 +76,7 @@ public class LoginController {
      * @author wdl
      * @date 2017/12/7 21:23
      */
-    @RequestMapping("/system/user/imgCode/generate.htm")
+    @RequestMapping("/user/imgCode/generate")
     @ResponseBody
     public void generate(HttpServletResponse response,
                          HttpSession session) throws Exception {
