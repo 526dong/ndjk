@@ -51,17 +51,42 @@ public class BrandInteractionController {
      * @Version: 2.0
      */
     @RequestMapping(value = "/thumbsViewService/insertThumbsView")
-    @ResponseBody
     public Object insertThumbsView(@RequestParam String searchParams) {
         ThumbsViewDetail thumbsViewDetail = GsonUtil.fromJson(ThumbsViewDetail.class, searchParams);
-
-        int insert = thumbsViewService.insert(thumbsViewDetail);
+        if (thumbsViewDetail == null) {
+            return JsonResult.error(400, "数据有问题");
+        }
+        ThumbsViewDetail thubsViewDetail = thumbsViewService.findThubsViewDetail(thumbsViewDetail.getOpenid());
+        int insert = 0;
+        if (thubsViewDetail == null) {//判断是否点过赞，如果点过就删除，如果没点过就添加
+            insert = thumbsViewService.insert(thumbsViewDetail);
+        } else {
+            thumbsViewService.deleteById(thubsViewDetail.getId());
+        }
         if (insert > 0) {
             //点赞总表点赞数加1
             ThumbsViewList selective = thumbsViewListService.findSelective(thumbsViewDetail.getThumbsId());
-            selective.setThumbsNum(selective.getThumbsNum()+1);
+            selective.setThumbsNum(selective.getThumbsNum() + 1);
             thumbsViewListService.updateByPrimaryKeySelective(selective);
             return JsonResult.ok(insert, "插入成功");
+        }
+        return JsonResult.error(400, "插入失败");
+    }
+    /**
+     * @Author: wl
+     * @Description: 观看人数统计，点击链接一次，就加1
+     * @Date: 2018/1/15  11:13
+     * @Version: 2.0
+     *
+     */
+    @RequestMapping(value = "/thumbsViewService/insertThumbsView")
+    public Object insertView(@RequestParam(value = "projectId", required = true) Long projectId) {
+        ThumbsViewList selective = thumbsViewListService.findSelective(projectId);
+        int i = selective.getViewNum() + 1;
+        selective.setViewNum(i);
+        int insertNum = thumbsViewListService.updateByPrimaryKeySelective(selective);
+        if (insertNum > 0) {
+            return JsonResult.ok(insertNum, "插入成功");
         }
         return JsonResult.error(400, "插入失败");
     }

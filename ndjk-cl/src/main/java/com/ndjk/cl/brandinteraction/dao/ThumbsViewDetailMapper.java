@@ -51,4 +51,6 @@ public interface ThumbsViewDetailMapper {
      * @mbggenerated Fri Jan 12 16:09:45 CST 2018
      */
     int updateByPrimaryKey(ThumbsViewDetail record);
+
+    ThumbsViewDetail findThumbsViewDetailByOpenId(String openid);
 }

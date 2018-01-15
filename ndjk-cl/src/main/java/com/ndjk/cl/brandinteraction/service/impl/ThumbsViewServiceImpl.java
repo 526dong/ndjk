@@ -18,4 +18,14 @@ public class ThumbsViewServiceImpl implements ThumbsViewService {
     public int insert(ThumbsViewDetail thumbsViewDetail) {
         return thumbsViewDetailMapper.insertSelective(thumbsViewDetail);
     }
+
+    @Override
+    public ThumbsViewDetail findThubsViewDetail(String openid) {
+        return thumbsViewDetailMapper.findThumbsViewDetailByOpenId(openid);
+    }
+
+    @Override
+    public int deleteById(Long id) {
+        return thumbsViewDetailMapper.deleteByPrimaryKey(id);
+    }
 }
