@@ -242,5 +242,25 @@
       <if test="null != applyEndTime and applyEndTime != ''">and #{applyEndTime}>= DATE_FORMAT(so.create_time,'%Y-%m-%d')</if>
       <if test="null != state and '' != state" > and so.state = #{state} </if>
     </where>
+    <if test="beginPage != null and pageSize != null">
+      limit ${beginPage},${pageSize}
+    </if>
+  </select>
+
+  <select id="selectListCOunt" resultType="java.lang.Integer" parameterType="java.util.Map">
+    SELECT
+    count(1)
+    FROM
+    service_order so,
+    kindergarten kg
+    <where>
+      so.kg_id = kg.id
+      <if test="null != kgName and '' != kgName" > and kg.kg_name = #{kgName} </if>
+      <if test="null != applyName and '' != applyName" > and so.apply_name = #{applyName} </if>
+      <if test="null != applyPhone and '' != applyPhone" > and so.phone = #{applyPhone} </if>
+      <if test="null != applyStartTime and applyStartTime != ''">and DATE_FORMAT(so.create_time,'%Y-%m-%d')>= #{applyStartTime}</if>
+      <if test="null != applyEndTime and applyEndTime != ''">and #{applyEndTime}>= DATE_FORMAT(so.create_time,'%Y-%m-%d')</if>
+      <if test="null != state and '' != state" > and so.state = #{state} </if>
+    </where>
   </select>
 </mapper>

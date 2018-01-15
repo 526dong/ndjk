@@ -8,6 +8,7 @@ import com.ndjk.cl.brandservice.service.BrandServiceService;
 import com.ndjk.cl.brandservice.service.KindergartenService;
 import com.ndjk.cl.utils.ControllerUtil;
 import com.ndjk.cl.utils.MyRuntimeException;
+import com.ndjk.cl.utils.RdPage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,12 +54,15 @@ public class BrandServiceController {
         List<Map<String, Object>> serviceOrders = new ArrayList<>(10000);
         try {
             //查询总数
-
+            Integer count = this.serviceOrderService.selectListCOunt(params);
+            RdPage rdPage = new RdPage(count,page,size);
             //查询分页后数据
             params.put("beginPage",(page-1)*size);
-            params.put("size",size);
+            params.put("pageSize",size);
             serviceOrders = serviceOrderService.selectList(params);
-            return JsonResult.ok(serviceOrders, "服务列表查询成功");
+            JsonResult jsonResult = new JsonResult(200,serviceOrders, "服务列表查询成功");
+            jsonResult.setPage(rdPage);
+            return jsonResult;
         } catch (Exception e) {
             logger.error("品牌服务模块报错：服务列表查询异常!", e);
             return JsonResult.error(400, "服务列表查询失败");

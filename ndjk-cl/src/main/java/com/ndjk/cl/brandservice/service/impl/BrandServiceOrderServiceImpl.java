@@ -108,6 +108,6 @@ public class BrandServiceOrderServiceImpl implements BrandServiceOrderService{
      * @since: 2018/1/11  15:41
      */
     public Integer selectListCOunt(Map<String, Object> params){
-        return 0;
+        return this.serviceOrderMapper.selectListCOunt(params);
     }
 }

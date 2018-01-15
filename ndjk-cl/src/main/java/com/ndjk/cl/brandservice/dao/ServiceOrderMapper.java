@@ -33,4 +33,11 @@ public interface ServiceOrderMapper {
      * @return
      */
     List<Map<String, Object>> selectList(Map<String, Object> params);
+
+    /**
+     * 查询服务列表总数
+     * @param params
+     * @return
+     */
+    Integer selectListCOunt(Map<String, Object> params);
 }
