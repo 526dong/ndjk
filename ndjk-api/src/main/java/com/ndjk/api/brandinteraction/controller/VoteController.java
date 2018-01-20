@@ -40,4 +40,5 @@ public class VoteController {
         return JsonResult.error(insert, "投票失败");
     }
 
+    //票数展示
 }

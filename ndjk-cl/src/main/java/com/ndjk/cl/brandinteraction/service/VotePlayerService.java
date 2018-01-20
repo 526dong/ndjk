@@ -2,6 +2,8 @@ package com.ndjk.cl.brandinteraction.service;
 
 import com.ndjk.cl.brandinteraction.model.VotePlayer;
 
+import java.util.List;
+
 /**
  * Created by wl on 2018/1/20.
  */
@@ -14,4 +16,8 @@ public interface VotePlayerService {
      *
      */
     int insert(VotePlayer votePlayer);
+
+    //投票数展示
+
+    List<VotePlayer> listAll();
 }

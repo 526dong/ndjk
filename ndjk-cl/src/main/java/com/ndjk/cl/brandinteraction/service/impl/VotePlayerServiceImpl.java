@@ -6,6 +6,8 @@ import com.ndjk.cl.brandinteraction.service.VotePlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by wl on 2018/1/20.
  */
@@ -17,5 +19,10 @@ public class VotePlayerServiceImpl implements VotePlayerService {
     @Override
     public int insert(VotePlayer votePlayer) {
         return votePlayerMapper.insertSelective(votePlayer);
+    }
+
+    @Override
+    public List<VotePlayer> listAll() {
+        return votePlayerMapper.listAll();
     }
 }
