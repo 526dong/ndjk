@@ -1,6 +1,7 @@
 package com.ndjk.cl.brandinteraction.dao;
 
 import com.ndjk.cl.brandinteraction.model.VotePlayer;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -61,5 +62,5 @@ public interface VotePlayerMapper {
      */
     int updateByPrimaryKey(VotePlayer record);
 
-    List<VotePlayer> listAll();
+    List<VotePlayer> listAll(@Param("votePlayer") VotePlayer votePlayer, @Param("offset") int offset, @Param("pageSize") int pageSiz);
 }

@@ -37,8 +37,22 @@ public class VoteController {
         if (insert > 0) {
             return JsonResult.ok(insert, "投票成功");
         }
-        return JsonResult.error(insert, "投票失败");
+        return JsonResult.error(400, "投票失败");
     }
 
     //票数展示
+    @RequestMapping(value = "/brand/interaction/vote/votePlayerList")
+    @ResponseBody
+    public Object votePlayerList(@RequestParam String searchParams,@RequestParam Integer currentPage, @RequestParam Integer pageSize) {
+        VotePlayer votePlayer = GsonUtil.fromJson(VotePlayer.class, searchParams);
+        if(votePlayer==null){
+            votePlayer=new VotePlayer();
+        }
+        List<VotePlayer> votePlayers = votePlayerService.listAll(votePlayer,currentPage, pageSize);
+        if (votePlayers!=null&&votePlayers.size()>0) {
+            return JsonResult.ok(votePlayers, "查询成功");
+        }
+        return JsonResult.error(400, "查询失败");
+    }
+
 }

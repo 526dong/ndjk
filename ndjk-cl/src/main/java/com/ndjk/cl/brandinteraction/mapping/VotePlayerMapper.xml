@@ -224,9 +224,21 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="listAll" resultMap="BaseResultMap">
+  <select id="listAll" resultMap="BaseResultMap" parameterType="com.ndjk.cl.brandinteraction.model.VotePlayer">
     select
     <include refid="Base_Column_List"/>
     from nd_vote_player
+    <trim prefix="where" prefixOverrides="and|or">
+
+      <if test="votePlayer.pname !='' and votePlayer.pname !=null">
+        and pname like CONCAT('%',#{votePlayer.pname},'%')
+      </if>
+      <if test="votePlayer.pcode !='' and votePlayer.pcode !=null">
+        and pcode = #{votePlayer.pcode}
+      </if>
+    </trim>
+    <if test="offset != null and pageSize != null">
+      limit #{offset} , #{pageSize}
+    </if>
   </select>
 </mapper>

@@ -22,7 +22,7 @@ public class VotePlayerServiceImpl implements VotePlayerService {
     }
 
     @Override
-    public List<VotePlayer> listAll() {
-        return votePlayerMapper.listAll();
+    public List<VotePlayer> listAll(VotePlayer votePlayer, int currentPage, int pageSize) {
+        return votePlayerMapper.listAll(votePlayer,currentPage,pageSize);
     }
 }

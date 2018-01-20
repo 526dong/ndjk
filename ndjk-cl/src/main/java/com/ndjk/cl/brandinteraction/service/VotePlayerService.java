@@ -19,5 +19,5 @@ public interface VotePlayerService {
 
     //投票数展示
 
-    List<VotePlayer> listAll();
+    List<VotePlayer> listAll(VotePlayer votePlayer, int currentPage, int pageSize);
 }
