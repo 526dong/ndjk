@@ -7,12 +7,15 @@ import com.ndjk.cl.brandservice.model.resp.JsonResult;
 import com.ndjk.cl.sys.model.SysAppConfig;
 import com.ndjk.cl.sys.service.SysAppConfigService;
 import com.ndjk.cl.utils.GsonUtil;
+import com.ndjk.cl.utils.UploadFileUtil;
+import com.ndjk.cl.utils.dto.UploadFileRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**

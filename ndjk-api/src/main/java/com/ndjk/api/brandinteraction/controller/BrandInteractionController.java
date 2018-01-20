@@ -80,6 +80,7 @@ public class BrandInteractionController {
      *
      */
     @RequestMapping(value = "/thumbsViewService/insertThumbsView")
+    @ResponseBody
     public Object insertView(@RequestParam(value = "projectId", required = true) Long projectId) {
         ThumbsViewList selective = thumbsViewListService.findSelective(projectId);
         int i = selective.getViewNum() + 1;
