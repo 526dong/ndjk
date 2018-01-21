@@ -3,8 +3,12 @@ package com.ndjk.cl.brandservice.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.ndjk.cl.Goods.model.GoodsCategory;
 import com.ndjk.cl.brandservice.dao.BrandServiceMapper;
+import com.ndjk.cl.brandservice.dao.OrderServiceMapper;
+import com.ndjk.cl.brandservice.dao.ServiceOrderMapper;
 import com.ndjk.cl.brandservice.model.BrandService;
 import com.ndjk.cl.brandservice.model.OrderService;
+import com.ndjk.cl.brandservice.model.ServiceOrder;
+import com.ndjk.cl.brandservice.model.req.ServiceAcceptParam;
 import com.ndjk.cl.brandservice.service.BrandOrderServiceService;
 import com.ndjk.cl.brandservice.service.BrandServiceService;
 import com.ndjk.cl.utils.JsonUtils;
@@ -13,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +31,10 @@ public class BrandServiceServiceImpl implements BrandServiceService{
     private BrandServiceMapper brandServiceMapper;
     @Autowired
     private BrandOrderServiceService brandOrderServiceService;
-
+    @Autowired
+    private OrderServiceMapper orderServiceMapper;
+    @Autowired
+    private ServiceOrderMapper serviceOrderMapper;
     /**
      * 新增
      * @param brandService
@@ -55,10 +63,7 @@ public class BrandServiceServiceImpl implements BrandServiceService{
      */
     @Override
     public void updateServiceByOrderId(Integer orderId, String priceJsonStr) {
-        //1、删除订单服务关联信息
-        brandOrderServiceService.deleteRelateByOrderId(orderId);
         //2、更新订单服务信息
-        List<BrandService> brandServiceList = new ArrayList<>(10000);
         //判空处理
         if (StringUtils.isEmpty(priceJsonStr)) {
             throw new MyRuntimeException("品牌服务模块报错：该订单下无服务");
@@ -68,20 +73,23 @@ public class BrandServiceServiceImpl implements BrandServiceService{
             throw new MyRuntimeException("品牌服务模块报错：该订单下无服务");
         }
         //json to entity
+        BigDecimal totalPrice = new BigDecimal("0");
         for (int i = 0; i < jsonArray.size(); i++) {
-            BrandService brandService = JsonUtils.parse(priceJsonStr, BrandService.class);
-            brandServiceList.add(brandService);
+            ServiceAcceptParam serviceAcceptParam = JsonUtils.parse(jsonArray.get(i).toString(), ServiceAcceptParam.class);
+            //修改单个订单服务的价格
+            OrderService orderService = new OrderService();
+            orderService.setId(serviceAcceptParam.getId());
+            orderService.setPrice(serviceAcceptParam.getPrice());
+            orderServiceMapper.updateByPrimaryKeySelective(orderService);
+            //计算总价格
+            totalPrice = totalPrice.add(serviceAcceptParam.getPrice());
         }
-        //save brand service
-        if (brandServiceList != null && brandServiceList.size() > 0) {
-            for (BrandService entity:brandServiceList) {
-                //更新时间
-                entity.setUpdateTime(new Date());
-                this.brandServiceMapper.updateByPrimaryKeySelective(entity);
-                //3、更新订单服务关联信息
-                saveOrderServiceRelate(orderId, entity);
-            }
-        }
+        //修改共订单信息
+        ServiceOrder serviceOrder = new ServiceOrder();
+        serviceOrder.setId(orderId);
+        serviceOrder.setPrice(totalPrice);
+        serviceOrder.setState(2);
+        serviceOrderMapper.updateByPrimaryKeySelective(serviceOrder);
     }
 
     /**
