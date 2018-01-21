@@ -37,11 +37,11 @@ public class KindergartenController {
      */
     @RequestMapping(value = "/findAll")
     @ResponseBody
-    public JsonResult findAll(HttpServletRequest request,int page,int size) {
+    public JsonResult findAll(HttpServletRequest request) {
         //查询条件
         String name = request.getParameter("name");
         String state = request.getParameter("state");
-        return kindergartenService.selectListByNameAndState(name, state,page,size);
+        return kindergartenService.selectListByNameAndState(name, state,1,10);
     }
 
     /**
@@ -52,6 +52,7 @@ public class KindergartenController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public JsonResult add(Kindergarten kindergarten) {
+
         //创建时间
         kindergarten.setCreateTime(new Date());
         try {
@@ -71,6 +72,9 @@ public class KindergartenController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public JsonResult update(Kindergarten kindergarten) {
+        if(kindergarten == null){
+            return new JsonResult(500,"请输入正确的参数");
+        }
         //更新时间
         kindergarten.setUpdateTime(new Date());
         try {

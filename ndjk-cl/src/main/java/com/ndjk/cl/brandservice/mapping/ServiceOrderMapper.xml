@@ -212,6 +212,7 @@
   <select id="selectList" resultType="java.util.Map" parameterType="java.util.Map">
     SELECT
       so.id orderId,
+      so.is_shipping isShipping,
       so.order_no orderNo,
       so.state state,
       DATE_FORMAT(so.create_time, '%Y-%m-%d %h:%i:%s') applyTime,
@@ -250,7 +251,7 @@
     </if>
   </select>
 
-  <select id="selectListCOunt" resultType="java.lang.Integer" parameterType="java.util.Map">
+  <select id="selectListCount" resultType="java.lang.Integer" parameterType="java.util.Map">
     SELECT
     count(1)
     FROM

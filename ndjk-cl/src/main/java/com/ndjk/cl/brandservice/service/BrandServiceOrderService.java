@@ -46,5 +46,5 @@ public interface BrandServiceOrderService {
      * @Author: zfw
      * @since: 2018/1/11  15:41
      */
-    Integer selectListCOunt(Map<String, Object> params);
+    Integer selectListCunt(Map<String, Object> params);
 }

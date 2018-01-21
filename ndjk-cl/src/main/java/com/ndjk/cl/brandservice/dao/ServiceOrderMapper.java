@@ -39,5 +39,5 @@ public interface ServiceOrderMapper {
      * @param params
      * @return
      */
-    Integer selectListCOunt(Map<String, Object> params);
+    Integer selectListCount(Map<String, Object> params);
 }

@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Description 品牌服务controller
@@ -54,12 +51,24 @@ public class BrandServiceController {
         List<Map<String, Object>> serviceOrders = new ArrayList<>(10000);
         try {
             //查询总数
-            Integer count = this.serviceOrderService.selectListCOunt(params);
+            Integer count = this.serviceOrderService.selectListCunt(params);
             RdPage rdPage = new RdPage(count,page,size);
             //查询分页后数据
             params.put("beginPage",(page-1)*size);
             params.put("pageSize",size);
             serviceOrders = serviceOrderService.selectList(params);
+            for(int i=0;i<serviceOrders.size();i++){
+                Map resultMap = serviceOrders.get(i);
+                if(resultMap.get("state").equals(1)){
+                    resultMap.put("stateStr","未受理");
+                }
+                if(resultMap.get("state").equals(2)){
+                    resultMap.put("stateStr","已受理");
+                }
+                if(resultMap.get("state").equals(3)){
+                    resultMap.put("stateStr","已完成");
+                }
+            }
             JsonResult jsonResult = new JsonResult(200,serviceOrders, "服务列表查询成功");
             jsonResult.setPage(rdPage);
             return jsonResult;
@@ -77,10 +86,9 @@ public class BrandServiceController {
     @RequestMapping(value = "/addkgacount")
     @ResponseBody
     public JsonResult addkgacount(Kindergarten kindergarten) {
-        //处理新增账号中account属性
-        String account = kindergarten.getAccount();
-        if (account != null && !"".equals(account)) {
-            kindergarten.setLoginName(account);
+        Kindergarten kindergarten1 = this.kindergartenService.selectByLoginName(kindergarten.getLoginName());
+        if(kindergarten1 != null){
+            return JsonResult.error(400,"账号已存在");
         }
         //创建时间
         kindergarten.setCreateTime(new Date());

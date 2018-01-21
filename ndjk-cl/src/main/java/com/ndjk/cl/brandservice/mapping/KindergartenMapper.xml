@@ -154,8 +154,5 @@
         and status = #{status,jdbcType=INTEGER}
       </if>
     </where>
-    <if test="beginPage != null and pageSize != null">
-      limit ${beginPage},${pageSize}
-    </if>
   </select>
 </mapper>
