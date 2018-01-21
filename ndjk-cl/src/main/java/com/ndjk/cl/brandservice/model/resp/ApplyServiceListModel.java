@@ -16,6 +16,8 @@ public class ApplyServiceListModel implements Serializable {
 
     private String state;   //状态
 
+    private String stateStr; //状态说明
+
     private String detail; //详情
 
     public ApplyServiceListModel(String acName, Date applyTime, String state) {
@@ -54,5 +56,20 @@ public class ApplyServiceListModel implements Serializable {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public String getStateStr() {
+        if("1".equals(state)){
+            return "未受理";
+        }else if("2".equals(state)){
+            return "已受理";
+        }else if("3".equals(state)){
+            return "已完成";
+        }
+        return null;
+    }
+
+    public void setStateStr(String stateStr) {
+        this.stateStr = stateStr;
     }
 }
