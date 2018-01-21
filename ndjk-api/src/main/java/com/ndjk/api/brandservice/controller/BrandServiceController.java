@@ -98,7 +98,7 @@ public class BrandServiceController {
      * @param type
      * @return
      */
-    @RequestMapping(value = "/brandservice/getservicelist")
+    @RequestMapping(value = "")
     @ResponseBody
     public Object getservicelist(int type){
         List<BrandService> brandServices = this.brandServiceService.selectByType(type);
