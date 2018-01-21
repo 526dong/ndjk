@@ -70,7 +70,7 @@ public class UploadFileController {
         // 读入 文件
         File files = new File("C:\\Users\\Administrator\\Desktop\\aa.jpg");
         FileInputStream in_file = new FileInputStream(files);
-        
+
         List<UploadFileRes> list = new LinkedList<>();
         UploadFileUtil.saveMultipartFile(list,file);
     }
