@@ -17,4 +17,7 @@ public interface ContentManageService {
 
     //内容修改
     int updateContentManage(ContentManage contentManage);
+
+    //内容删除
+    int deleteContentManage(Long id);
 }

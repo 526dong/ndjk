@@ -56,4 +56,16 @@ public class ContentManageController {
             return JsonResult.error(400,"内容修改出错");
         }
     }
+
+    //内容删除
+    @RequestMapping(value = "/brand/interaction/deleteContentManage")
+    @ResponseBody
+    public JsonResult deleteContentManage(Long id) {
+        int i = contentManageService.deleteContentManage(id);
+        if(i>0){
+            return JsonResult.ok(i,"内容修改成功");
+        }else {
+            return JsonResult.error(400,"内容修改出错");
+        }
+    }
 }
