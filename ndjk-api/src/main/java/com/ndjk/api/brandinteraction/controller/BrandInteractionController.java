@@ -25,6 +25,7 @@ import java.util.List;
  * Created by wl on 2018/1/12.
  */
 @Controller
+@RequestMapping(value="/api")
 public class BrandInteractionController {
     @Autowired
     private SysAppConfigService SysAppConfigService;
@@ -79,7 +80,7 @@ public class BrandInteractionController {
      * @Version: 2.0
      *
      */
-    @RequestMapping(value = "/thumbsViewService/insertThumbsView")
+    @RequestMapping(value = "/thumbsViewService/insertThumbsView1")
     public Object insertView(@RequestParam(value = "projectId", required = true) Long projectId) {
         ThumbsViewList selective = thumbsViewListService.findSelective(projectId);
         int i = selective.getViewNum() + 1;

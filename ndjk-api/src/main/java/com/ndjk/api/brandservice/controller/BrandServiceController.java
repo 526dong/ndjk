@@ -63,32 +63,34 @@ public class BrandServiceController {
         serviceOrder.setPhone(applyServiceReq.getPhone());
         serviceOrder.setWork(applyServiceReq.getWork());
         serviceOrder.setState(1);
-        Integer bsId = this.brandServiceOrderService.insertSelective(serviceOrder);
+        this.brandServiceOrderService.insertSelective(serviceOrder);
 
         //2、插入订单和服务的关系数据
         List<String> freeServiceList = JSON.parseArray(applyServiceReq.getFreeServices(), String.class);
-        if(freeServiceList == null || freeServiceList.size()== 0){
-            return new BaseResponseModel(400,"操作失败");
-        }
-        for(String freeServcie:freeServiceList){
-            Integer servcieId =Integer.valueOf(JSON.parseObject(freeServcie).getString("id"));
-            Integer count =Integer.valueOf(JSON.parseObject(freeServcie).getString("count"));
-            OrderService orderService = new OrderService();
-            orderService.setCount(count);
-            orderService.setOrderId(bsId);
-            orderService.setServiceId(servcieId);
-            this.brandOrderServiceService.insertSelective(orderService);
+        if(freeServiceList != null || freeServiceList.size() != 0){
+            for(String freeServcie:freeServiceList){
+                Integer servcieId =Integer.valueOf(JSON.parseObject(freeServcie).getString("id"));
+                Integer count =Integer.valueOf(JSON.parseObject(freeServcie).getString("count"));
+                OrderService orderService = new OrderService();
+                orderService.setCount(count);
+                orderService.setOrderId(serviceOrder.getId());
+                orderService.setServiceId(servcieId);
+                this.brandOrderServiceService.insertSelective(orderService);
+            }
         }
         String[] nofreeServices = applyServiceReq.getNoFreeServices().split(",");
-        if(nofreeServices ==null || nofreeServices.length == 0){
-            return new BaseResponseModel(400,"操作失败");
+        if(nofreeServices !=null || nofreeServices.length != 0){
+            for(int i=0;i<nofreeServices.length;i++){
+                OrderService orderService = new OrderService();
+                orderService.setCount(1);
+                orderService.setOrderId(serviceOrder.getId());
+                orderService.setServiceId(Integer.valueOf(nofreeServices[i]));
+                this.brandOrderServiceService.insertSelective(orderService);
+            }
         }
-        for(int i=0;i<nofreeServices.length;i++){
-            OrderService orderService = new OrderService();
-            orderService.setCount(1);
-            orderService.setOrderId(bsId);
-            orderService.setServiceId(Integer.valueOf(nofreeServices[i]));
-            this.brandOrderServiceService.insertSelective(orderService);
+        if((nofreeServices ==null || nofreeServices.length == 0) &&
+                (freeServiceList == null || freeServiceList.size() == 0)){
+            return new BaseResponseModel(200,"操作失败");
         }
         return new BaseResponseModel(200,"操作成功");
     }

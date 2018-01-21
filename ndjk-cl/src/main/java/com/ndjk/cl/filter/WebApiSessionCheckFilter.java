@@ -113,10 +113,6 @@ public class WebApiSessionCheckFilter implements Filter {
             if (null == kindergarten) {
                 return false;
             }
-            Integer userId = Integer.valueOf(r.getParameter("userId"));
-            if(!userId.equals(kindergarten.getId())){
-                return false;
-            }
             return true;
         } catch (Exception e) {
             return false;

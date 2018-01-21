@@ -111,7 +111,7 @@ public class KindergartenServiceImpl implements KindergartenService{
         Kindergarten kindergarten1 = new Kindergarten();
         kindergarten1.setPassword(newPwd);
         kindergarten1.setId(kindergarten.getId());
-        this.kindergartenMapper.updateByPrimaryKeySelective(kindergarten);
+        this.kindergartenMapper.updateByPrimaryKeySelective(kindergarten1);
         return null;
     }
 }
