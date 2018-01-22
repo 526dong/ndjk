@@ -89,7 +89,18 @@ public class BrandServiceOrderServiceImpl implements BrandServiceOrderService{
         OrderServicePackage.Order order = new OrderServicePackage.Order();
         order.setOrderId(serviceOrder.getId());
         order.setOrderNo(serviceOrder.getOrderNo());
-        order.setOrderServiceList(this.serviceOrderMapper.selectServiceByOrderId(orderId));
+        List<Map<String, Object>> mapList = this.serviceOrderMapper.selectServiceByOrderId(orderId);
+        for(int i=0;i<mapList.size();i++){
+            Map<String,Object> resultMap = mapList.get(i);
+            if(resultMap.get("serviceType").equals(1)){
+                resultMap.put("typeStr","付费");
+            }
+            if(resultMap.get("serviceType").equals(2)){
+                resultMap.put("typeStr","免费");
+            }
+        }
+        order.setOrderServiceList(mapList);
+
         return order;
     }
 
@@ -107,7 +118,7 @@ public class BrandServiceOrderServiceImpl implements BrandServiceOrderService{
      * @Author: zfw
      * @since: 2018/1/11  15:41
      */
-    public Integer selectListCOunt(Map<String, Object> params){
-        return this.serviceOrderMapper.selectListCOunt(params);
+    public Integer selectListCunt(Map<String, Object> params){
+        return this.serviceOrderMapper.selectListCount(params);
     }
 }

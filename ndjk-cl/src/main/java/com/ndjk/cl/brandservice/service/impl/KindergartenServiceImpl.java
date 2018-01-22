@@ -29,6 +29,7 @@ public class KindergartenServiceImpl implements KindergartenService{
         this.kindergartenMapper.insertSelective(kindergarten);
     }
 
+
     /**
      * 删除方法
      * @param id
@@ -70,9 +71,20 @@ public class KindergartenServiceImpl implements KindergartenService{
             searchKindergartensModel.setStatus(Integer.valueOf(state));
         }
         List<Kindergarten> kindergartenList = this.kindergartenMapper.selectKindergartenList(searchKindergartensModel);
-        JsonResult jsonResult = new JsonResult();
+        if(kindergartenList != null && kindergartenList.size() >0){
+            for(Kindergarten kindergarten:kindergartenList){
+                if(kindergarten.getStatus() == 1){
+                    kindergarten.setStatusStr("可用");
+                }
+                if(kindergarten.getStatus() == 1){
+                    kindergarten.setStatusStr("禁用");
+                }
+            }
+        }
+
+        JsonResult jsonResult = new JsonResult(200,"操作成功");
         jsonResult.setData(kindergartenList);
-        return null;
+        return jsonResult;
     }
 
     /**

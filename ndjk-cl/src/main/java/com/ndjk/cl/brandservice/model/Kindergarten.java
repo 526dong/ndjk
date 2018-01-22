@@ -18,6 +18,8 @@ public class Kindergarten implements Serializable{
 
     private Integer status;
 
+    private String statusStr;
+
     private Date createTime;
 
     private Date updateTime;
@@ -87,5 +89,13 @@ public class Kindergarten implements Serializable{
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getStatusStr() {
+        return statusStr;
+    }
+
+    public void setStatusStr(String statusStr) {
+        this.statusStr = statusStr;
     }
 }
