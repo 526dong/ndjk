@@ -60,7 +60,7 @@
 			<description>
 			</description>
 			<param-name>ignore</param-name>
-			<param-value>/api/brandservice/login;/api/user/imgCode/generate;/api/brandservice/getservicelist</param-value>
+			<param-value>/ndjk-api/api/brandservice/login;/ndjk-api/api/user/imgCode/generate;/ndjk-api/api/brandservice/getservicelist</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
