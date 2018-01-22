@@ -4,7 +4,6 @@ import com.ndjk.cl.utils.GsonUtil;
 import com.ndjk.cl.utils.StringUtil;
 import com.ndjk.cl.utils.UploadFileUtil;
 import com.ndjk.cl.utils.dto.UploadFileRes;
-import jdk.nashorn.internal.objects.Global;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
