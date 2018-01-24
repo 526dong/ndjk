@@ -708,4 +708,16 @@ public final class StringUtil {
         return false;
     }
 
+    /**
+     * @description: 首字母大写
+     * @param:
+     * @author: xiang.li
+     * @date: 16:40 2018/1/12 0012
+     */
+    public static String firstCharUpperCase(String s) {
+        StringBuffer sb = new StringBuffer(s.substring(0, 1).toUpperCase());
+        sb.append(s.substring(1, s.length()));
+        return sb.toString();
+    }
+
 }
