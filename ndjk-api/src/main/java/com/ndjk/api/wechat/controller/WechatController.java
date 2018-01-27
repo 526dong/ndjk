@@ -73,7 +73,7 @@ public class WechatController {
         service.handleMsg(req, resp);
     }*/
 
-    @RequestMapping(value = "/api/actzm/mine/wechat/getTicket.htm")
+    @RequestMapping(value = "/api/actzm/mine/wechat/getTicket")
     @ResponseBody
     public void getTicket(String url, HttpServletResponse response) throws Exception {
 
@@ -89,7 +89,7 @@ public class WechatController {
         pw.write(json);
     }
     //获取微信用户信息
-    @RequestMapping(value = "/api/actzm/mine/wechat/getWechatUserInfo.htm")
+    @RequestMapping(value = "/api/actzm/mine/wechat/getWechatUserInfo")
     @ResponseBody
     public void getWechatUserInfo(String code, HttpServletResponse response, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();

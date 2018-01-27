@@ -71,7 +71,7 @@ public class UploadFileController {
         FileInputStream in_file = new FileInputStream(files);
 
         List<UploadFileRes> list = new LinkedList<>();
-        UploadFileUtil.saveMultipartFile(list,file);
+        UploadFileUtil.saveMultipartFile(list,file,"");
     }
 
 

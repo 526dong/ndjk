@@ -12,9 +12,9 @@ public class ParamesAPI {
 	// 随机戳
 	public static String encodingAESKey = "tw8ColhrtDzU6XTHJ2shUeTyuaPQkSzdvD8jYtnTIYf";
 	// 你的企业号ID
-	public static String corpId = "wx6950cdbfd9a60ec8";
+	public static String corpId = "wx83ebca2222994a6a";
 	// 管理组的凭证密钥，每个secret代表了对应用、通讯录、接口的不同权限；不同的管理组拥有不同的secret
-	public static String secret = "291c3f1147028a8a590f3d44b1c9b444";
+	public static String secret = "d213df697eb8358fbc8bba6a5eb7b092";
 	// OAuth2 回调地址
 	public static String REDIRECT_URI = "";
 }

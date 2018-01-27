@@ -19,6 +19,7 @@
     <result column="collection_num" property="collectionNum" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="content_type" property="contentType" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ndjk.cl.brandinteraction.model.ContentManage" extends="BaseResultMap" >
     <!--
@@ -35,7 +36,7 @@
       This element was generated on Sun Jan 21 11:36:08 CST 2018.
     -->
     id, title, column_id, column_type, author, picture_url, other_url, thumbs_num, views_num, 
-    collection_num, create_time, update_time
+    collection_num, create_time, update_time,content_type
   </sql>
   <sql id="Blob_Column_List" >
     <!--
@@ -77,12 +78,12 @@
       column_type, author, picture_url, 
       other_url, thumbs_num, views_num, 
       collection_num, create_time, update_time, 
-      contentes)
+      contentes,content_type)
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{columnId,jdbcType=BIGINT}, 
       #{columnType,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{pictureUrl,jdbcType=VARCHAR}, 
       #{otherUrl,jdbcType=VARCHAR}, #{thumbsNum,jdbcType=INTEGER}, #{viewsNum,jdbcType=INTEGER}, 
       #{collectionNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{contentes,jdbcType=LONGVARCHAR})
+      #{contentes,jdbcType=LONGVARCHAR},#{contentType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ndjk.cl.brandinteraction.model.ContentManage" >
     <!--
@@ -131,6 +132,9 @@
       <if test="contentes != null" >
         contentes,
       </if>
+      <if test="contentType != null" >
+        content_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -171,6 +175,9 @@
       </if>
       <if test="contentes != null" >
         #{contentes,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="contentType != null" >
+        #{contentType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -218,6 +225,9 @@
       <if test="contentes != null" >
         contentes = #{contentes,jdbcType=LONGVARCHAR},
       </if>
+      <if test="contentType != null" >
+        content_type = #{contentType,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -239,7 +249,8 @@
       collection_num = #{collectionNum,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      contentes = #{contentes,jdbcType=LONGVARCHAR}
+      contentes = #{contentes,jdbcType=LONGVARCHAR},
+    content_type=#{contentType,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ndjk.cl.brandinteraction.model.ContentManage" >
@@ -259,7 +270,8 @@
       views_num = #{viewsNum,jdbcType=INTEGER},
       collection_num = #{collectionNum,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+    content_type=#{contentType,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -286,6 +298,9 @@
       </if>
       <if test="contentManage.collectionNum !='' and contentManage.collectionNum !=null">
         and collection_num = #{contentManage.collectionNum}
+      </if>
+      <if test="contentManage.contentType !='' and contentManage.contentType !=null">
+        and content_type = #{contentManage.contentType}
       </if>
     </trim>
     <if test="offset != null and pageSize != null">

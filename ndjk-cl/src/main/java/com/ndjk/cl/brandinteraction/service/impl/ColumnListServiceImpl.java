@@ -6,6 +6,8 @@ import com.ndjk.cl.brandinteraction.service.ColumnListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by wl on 2018/1/21.
  */
@@ -16,5 +18,10 @@ public class ColumnListServiceImpl implements ColumnListService{
     @Override
     public int insertColumn(ColumnList columnList) {
         return columnListMapper.insertSelective(columnList);
+    }
+
+    @Override
+    public List<ColumnList> listAll() {
+        return columnListMapper.listAll();
     }
 }

@@ -77,18 +77,18 @@ public class UploadFileUtil {
         upins.close();
     }
 
-    public static void saveMultipartFile(List<UploadFileRes> list, MultipartFile file) {
+    public static void saveMultipartFile(List<UploadFileRes> list, MultipartFile file,String filePath) {
         if (!file.isEmpty()) {
-            UploadFileRes model = save(file);
+            UploadFileRes model = save(file,filePath);
             list.add(model);
         }
     }
-    private static UploadFileRes save(MultipartFile file) {
+    private static UploadFileRes save(MultipartFile file,String filePath) {
         UploadFileRes model = new UploadFileRes();
         model.setCreateTime(DateUtil.getNow());
 
         // 文件名称
-        String picName = file.getOriginalFilename();
+//        String picName = file.getOriginalFilename();
 
         CommonsMultipartFile cf = (CommonsMultipartFile) file;
         DiskFileItem fi = (DiskFileItem) cf.getFileItem();
@@ -108,7 +108,7 @@ public class UploadFileUtil {
         }
         // 保存文件
         String s = File.separator;
-        String filePath = s + "data" + s + "image" + s + fileType + s + System.currentTimeMillis() + s + picName;
+//        String filePath = s + "data" + s + "image" + s + fileType + s + System.currentTimeMillis() + s + picName;
         if (s.equals("\\")) {
             filePath = "D:" + filePath;
         }
@@ -129,7 +129,7 @@ public class UploadFileUtil {
         }
         // 转存文件
         model.setResPath(filePath);
-        model.setFileName(picName);
+//        model.setFileName(picName);
         model.setFileFormat(fileType);
         model.setFileSize(new BigDecimal(picSize));
         return model;

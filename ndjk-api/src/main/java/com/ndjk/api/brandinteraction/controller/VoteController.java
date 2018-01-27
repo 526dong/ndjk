@@ -22,6 +22,7 @@ import java.util.List;
  * Created by wl on 2018/1/20.
  */
 @Controller
+@RequestMapping(value="/api")
 public class VoteController {
     @Autowired
     private VotePlayerService votePlayerService;
