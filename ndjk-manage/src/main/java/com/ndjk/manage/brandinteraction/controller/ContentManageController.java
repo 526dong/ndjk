@@ -24,7 +24,7 @@ public class ContentManageController {
      * @param contentManage
      * @return
      */
-    @RequestMapping(value = "/brand/interaction/addContentManage")
+    @RequestMapping(value = "/mange/brand/interaction/addContentManage")
     @ResponseBody
     public JsonResult addContentManage(ContentManage contentManage) {
         int i = contentManageService.insertContentManage(contentManage);
@@ -35,7 +35,7 @@ public class ContentManageController {
         }
     }
     //内容列表
-    @RequestMapping(value = "/brand/interaction/listContentManage")
+    @RequestMapping(value = "/manage/brand/interaction/listContentManage")
     @ResponseBody
     public JsonResult listContentManage(ContentManage contentManage,int page,int size) {
         List<ContentManage> contentManages = contentManageService.listContent(contentManage, page, size);
@@ -46,7 +46,7 @@ public class ContentManageController {
         }
     }
     //内容修改
-    @RequestMapping(value = "/brand/interaction/updateContentManage")
+    @RequestMapping(value = "/manage/brand/interaction/updateContentManage")
     @ResponseBody
     public JsonResult updateContentManage(ContentManage contentManage) {
         int i = contentManageService.updateContentManage(contentManage);
