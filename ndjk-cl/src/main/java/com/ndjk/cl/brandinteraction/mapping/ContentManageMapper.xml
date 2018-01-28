@@ -275,7 +275,7 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="listAll" resultMap="BaseResultMap" parameterType="jcom.ndjk.cl.brandinteraction.model.vo.ContentManageVo">
+    <select id="listAll" resultMap="BaseResultMap" parameterType="com.ndjk.cl.brandinteraction.model.vo.ContentManageVo">
         select
         <include refid="Base_Column_List"/>
         from nd_content_manage

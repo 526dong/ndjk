@@ -2,6 +2,7 @@ package com.ndjk.cl.brandinteraction.service.impl;
 
 import com.ndjk.cl.brandinteraction.dao.ContentManageMapper;
 import com.ndjk.cl.brandinteraction.model.ContentManage;
+import com.ndjk.cl.brandinteraction.model.vo.ContentManageVo;
 import com.ndjk.cl.brandinteraction.service.ContentManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class ContentManageServiceImpl implements ContentManageService{
     }
 
     @Override
-    public List<ContentManage> listContent(Map<String,Object> contentManage, int currentPage, int pageSize) {
-        return contentManageMapper.listAll(contentManage,currentPage,pageSize);
+    public List<ContentManage> listContent(ContentManageVo contentManageVo, int currentPage, int pageSize) {
+        return contentManageMapper.listAll(contentManageVo,currentPage,pageSize);
     }
 
     @Override
