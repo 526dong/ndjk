@@ -3,6 +3,7 @@ package com.ndjk.cl.brandinteraction.dao;
 
 import com.ndjk.cl.brandinteraction.model.ContentManage;
 import com.ndjk.cl.brandinteraction.model.VotePlayer;
+import com.ndjk.cl.brandinteraction.model.vo.ContentManageVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -65,5 +66,5 @@ public interface ContentManageMapper {
      */
     int updateByPrimaryKey(ContentManage record);
 
-    List<ContentManage> listAll(Map<String,Object> contentManage, @Param("offset") int offset, @Param("pageSize") int pageSiz);
+    List<ContentManage> listAll(ContentManageVo contentManageVo, @Param("offset") int offset, @Param("pageSize") int pageSiz);
 }

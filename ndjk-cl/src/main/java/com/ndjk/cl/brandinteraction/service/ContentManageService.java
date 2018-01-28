@@ -2,6 +2,7 @@ package com.ndjk.cl.brandinteraction.service;
 
 import com.ndjk.cl.brandinteraction.model.ContentManage;
 import com.ndjk.cl.brandinteraction.model.VotePlayer;
+import com.ndjk.cl.brandinteraction.model.vo.ContentManageVo;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ public interface ContentManageService {
     int insertContentManage(ContentManage contentManage);
 
     //内容列表
-    List<ContentManage> listContent(Map<String,Object> contentManage, int currentPage, int pageSize);
+    List<ContentManage> listContent(ContentManageVo contentManageVo, int currentPage, int pageSize);
 
     //内容修改
     int updateContentManage(ContentManage contentManage);

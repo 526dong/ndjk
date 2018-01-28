@@ -3,6 +3,7 @@ package com.ndjk.manage.brandinteraction.controller;
 import com.google.gson.reflect.TypeToken;
 import com.ndjk.cl.brandinteraction.model.ColumnList;
 import com.ndjk.cl.brandinteraction.model.ContentManage;
+import com.ndjk.cl.brandinteraction.model.vo.ContentManageVo;
 import com.ndjk.cl.brandinteraction.service.ColumnListService;
 import com.ndjk.cl.brandinteraction.service.ContentManageService;
 import com.ndjk.cl.brandservice.model.Kindergarten;
@@ -68,9 +69,9 @@ public class ContentManageController {
     @ResponseBody
     public JsonResult listContentManage(@RequestParam String searchParams, @RequestParam Integer page, @RequestParam Integer size,
                                         HttpServletResponse response) {
-        Map<String, Object> stringStringMap = GsonUtil.fromJsonMap(searchParams, new TypeToken<Map<String, Object>>() {});
+        ContentManageVo contentManageVo = GsonUtil.fromJson(ContentManageVo.class, searchParams);
         try {
-            List<ContentManage> contentManages = contentManageService.listContent(stringStringMap, page, size);
+            List<ContentManage> contentManages = contentManageService.listContent(contentManageVo, page, size);
             if (contentManages != null && contentManages.size() > 0) {
                 return JsonResult.ok(contentManages, "内容查询成功");
             } else {

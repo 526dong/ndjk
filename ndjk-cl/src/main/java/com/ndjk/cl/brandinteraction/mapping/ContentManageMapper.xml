@@ -275,7 +275,7 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="listAll" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+    <select id="listAll" resultMap="BaseResultMap" parameterType="jcom.ndjk.cl.brandinteraction.model.vo.ContentManageVo">
         select
         <include refid="Base_Column_List"/>
         from nd_content_manage
@@ -306,9 +306,6 @@
             </if>
             <if test="collectionNumEnd !='' and collectionNumEnd !=null">
                 and collection_num &lt;= #{collectionNumEnd}
-            </if>
-            <if test="contentType !='' and contentType !=null">
-                and content_type = #{contentType}
             </if>
             <if test="createTimeStart !='' and create_timeStart !=null">
                 and create_time &gt;= #{createTimeStart}
