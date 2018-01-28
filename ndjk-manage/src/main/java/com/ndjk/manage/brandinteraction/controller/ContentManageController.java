@@ -1,5 +1,6 @@
 package com.ndjk.manage.brandinteraction.controller;
 
+import com.google.gson.reflect.TypeToken;
 import com.ndjk.cl.brandinteraction.model.ColumnList;
 import com.ndjk.cl.brandinteraction.model.ContentManage;
 import com.ndjk.cl.brandinteraction.service.ColumnListService;
@@ -9,9 +10,13 @@ import com.ndjk.cl.brandservice.model.resp.BaseResponseModel;
 import com.ndjk.cl.brandservice.model.resp.JsonResult;
 import com.ndjk.cl.sys.model.SysAppConfig;
 import com.ndjk.cl.sys.service.SysAppConfigService;
+import com.ndjk.cl.utils.GsonUtil;
 import com.ndjk.cl.utils.StringUtil;
 import com.ndjk.cl.utils.UploadFileUtil;
 import com.ndjk.cl.utils.dto.UploadFileRes;
+import com.ndjk.manage.brandservice.controller.BrandServiceController;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
@@ -32,6 +37,8 @@ import java.util.*;
  */
 @Controller
 public class ContentManageController {
+
+    private static Logger logger = LogManager.getLogger(ContentManageController.class);
     @Autowired
     private ContentManageService contentManageService;
     @Autowired
@@ -59,11 +66,18 @@ public class ContentManageController {
     //内容列表
     @RequestMapping(value = "/manage/brand/interaction/listContentManage")
     @ResponseBody
-    public JsonResult listContentManage(ContentManage contentManage, int page, int size) {
-        List<ContentManage> contentManages = contentManageService.listContent(contentManage, page, size);
-        if (contentManages != null && contentManages.size() > 0) {
-            return JsonResult.ok(contentManages, "内容查询成功");
-        } else {
+    public JsonResult listContentManage(@RequestParam String searchParams, @RequestParam Integer page, @RequestParam Integer size,
+                                        HttpServletResponse response) {
+        Map<String, Object> stringStringMap = GsonUtil.fromJsonMap(searchParams, new TypeToken<Map<String, Object>>() {});
+        try {
+            List<ContentManage> contentManages = contentManageService.listContent(stringStringMap, page, size);
+            if (contentManages != null && contentManages.size() > 0) {
+                return JsonResult.ok(contentManages, "内容查询成功");
+            } else {
+                return JsonResult.error(400, "内容查询出错");
+            }
+        } catch (Exception e) {
+            logger.error("删除系统配置项异常", e);
             return JsonResult.error(400, "内容查询出错");
         }
     }

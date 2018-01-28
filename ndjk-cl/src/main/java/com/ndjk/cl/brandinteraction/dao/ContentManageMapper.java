@@ -6,6 +6,7 @@ import com.ndjk.cl.brandinteraction.model.VotePlayer;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ContentManageMapper {
     /**
@@ -64,5 +65,5 @@ public interface ContentManageMapper {
      */
     int updateByPrimaryKey(ContentManage record);
 
-    List<ContentManage> listAll(@Param("contentManage") ContentManage contentManage, @Param("offset") int offset, @Param("pageSize") int pageSiz);
+    List<ContentManage> listAll(Map<String,Object> contentManage, @Param("offset") int offset, @Param("pageSize") int pageSiz);
 }

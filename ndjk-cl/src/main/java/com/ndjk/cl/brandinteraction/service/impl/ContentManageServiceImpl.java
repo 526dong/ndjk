@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wl on 2018/1/21.
@@ -21,7 +22,7 @@ public class ContentManageServiceImpl implements ContentManageService{
     }
 
     @Override
-    public List<ContentManage> listContent(ContentManage contentManage, int currentPage, int pageSize) {
+    public List<ContentManage> listContent(Map<String,Object> contentManage, int currentPage, int pageSize) {
         return contentManageMapper.listAll(contentManage,currentPage,pageSize);
     }
 
