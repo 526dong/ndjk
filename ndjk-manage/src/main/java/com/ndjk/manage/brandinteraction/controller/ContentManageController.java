@@ -77,7 +77,7 @@ public class ContentManageController {
                 return JsonResult.error(400, "内容查询出错");
             }
         } catch (Exception e) {
-            logger.error("删除系统配置项异常", e);
+            logger.error("查询内容列表异常", e);
             return JsonResult.error(400, "内容查询出错");
         }
     }
