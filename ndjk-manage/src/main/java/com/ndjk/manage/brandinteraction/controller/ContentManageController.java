@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.*;
 
@@ -91,110 +92,54 @@ public class ContentManageController {
         }
     }
 
-
     //发布内容接口
     @RequestMapping(value = "/manage/brand/interaction/sendContentManage")
     @ResponseBody
-    public JsonResult sendContentManage(HttpServletRequest request, List<MultipartFile> files) {
-        for (MultipartFile file : files) {
-            if (file == null) {
-                return JsonResult.error(400, "上传参数不能为空");
-            }
-        }
-
+    public JsonResult sendContentManage(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "files", required = false) List<MultipartFile> files) {
+        response.setContentType("text/html;charset=utf-8");
         //创建一个通用的多部分解析器
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         //判断 request 是否有文件上传,即多部分请求
         if (multipartResolver.isMultipart(request)) {
             //转换成多部分request
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-            Enumeration params = multiRequest.getParameterNames();
-//            String upDir = null;
             ContentManage cm = new ContentManage();
             //获得formdata对象中自定义的一些属性,是枚举类型
-            while (params.hasMoreElements()) {
-//                String name = (String)params.nextElement();
-//                upDir = multiRequest.getParameter("upDir");
-                String title = multiRequest.getParameter("title");
-                cm.setTitle(title);
-                String columnId = multiRequest.getParameter("columnId");
-                cm.setColumnId(Long.valueOf(columnId));
-                String columnType = multiRequest.getParameter("columnType");
-                cm.setColumnType(columnType);
-                String author = multiRequest.getParameter("author");
-                cm.setAuthor(author);
-                String pictureUrl = multiRequest.getParameter("pictureUrl");
-                cm.setPictureUrl(pictureUrl);
-                String otherUrl = multiRequest.getParameter("otherUrl");
-                cm.setOtherUrl(otherUrl);
-                String contentes = multiRequest.getParameter("contentes");
-                cm.setContentes(contentes);
-                String thumbsNum = multiRequest.getParameter("thumbsNum");
-                cm.setThumbsNum(Integer.valueOf(thumbsNum));
-                String viewsNum = multiRequest.getParameter("viewsNum");
-                cm.setViewsNum(Integer.valueOf(viewsNum));
-                String collectionNum = multiRequest.getParameter("collectionNum");
-                cm.setCollectionNum(Integer.valueOf(collectionNum));
-                String contentType = multiRequest.getParameter("contentType");
-                cm.setContentType(contentType);
+            String title = multiRequest.getParameter("title");
+            cm.setTitle(title);
+            String columnId = multiRequest.getParameter("columnId");
+            cm.setColumnId(Long.valueOf(columnId));
+            String columnType = multiRequest.getParameter("columnType");
+            cm.setColumnType(columnType);
+            String author = multiRequest.getParameter("author");
+            cm.setAuthor(author);
+            String pictureUrl = multiRequest.getParameter("pictureUrl");
+            cm.setPictureUrl(pictureUrl);
+            String otherUrl = multiRequest.getParameter("otherUrl");
+            cm.setOtherUrl(otherUrl);
+            String contentes = multiRequest.getParameter("contentes");
+            cm.setContentes(contentes);
+            String thumbsNum = multiRequest.getParameter("thumbsNum");
+            cm.setThumbsNum(Integer.valueOf(thumbsNum));
+            String viewsNum = multiRequest.getParameter("viewsNum");
+            cm.setViewsNum(Integer.valueOf(viewsNum));
+            String collectionNum = multiRequest.getParameter("collectionNum");
+            cm.setCollectionNum(Integer.valueOf(collectionNum));
+            String contentType = multiRequest.getParameter("contentType");
+            cm.setContentType(contentType);
 
-            }
-
-           /* Enumeration<String> parameterNames = request.getParameterNames();
-            while (parameterNames.hasMoreElements()) {
-                String s = parameterNames.nextElement();
-                String contentType = request.getParameter("contentType");
-
-            }*/
-            //取得request中的所有文件名
-//            Iterator<String> iter = multiRequest.getFileNames();
-//            List<Map> list = new ArrayList<>();
             MultiValueMap<String, MultipartFile> multiValueMap = multiRequest.getMultiFileMap();
-            List<MultipartFile> fileList = multiValueMap.get("file");
             String filePathes = "";
-            for (MultipartFile file : fileList) {
+            for (MultipartFile file : files) {
+                if (file == null) {
+                    return JsonResult.error(400, "上传参数不能为空");
+                }
                 //这里上传多张图片
                 StringBuffer url = new StringBuffer("");
                 Map<String, String> map1 = new HashMap<>();
                 if (file != null) {
 //                    //取得当前上传文件的文件名称
                     String picName = file.getOriginalFilename();
-//                    //如果名称不为“”,说明该文件存在，否则说明该文件不存在
-//                    if (originalFilename != null && originalFilename.trim() != "") {
-//                        String suffix = "";
-//
-//                        if (originalFilename.indexOf(".") > -1) {
-//                            suffix = originalFilename.substring(originalFilename.lastIndexOf("."), originalFilename.length());
-//                        }
-//
-//                        if (notImageFormat(suffix)) {
-//                            map.put("statusInfo",imageFomat);
-//                            return map;
-//                        }
-//                        if (isPassSize(file.getSize())) {
-//                            map.put("stateInfo",imageSize);
-//                            return map;
-//                        }
-//                        //重命名上传后的文件名
-//                        String fileName = idWorker.nextId() + suffix;
-//                        String dir = DateTimeUtil.formatDateTime("yy/MM/dd");
-//
-//                        if (!StringUtil.isBlank(upDir)){
-//                            url.append("/").append( upDir);
-//                        }
-//                        url.append("/").append(dir).append("/");
-//
-//                        //定义上传路径
-//                        String path = ParamUtil.imageServiceRealPath + url;
-//                        //上传图片
-//                        imageUploadService.uploadImage(path, fileName, file.getInputStream());
-//                        String allUrl = url + fileName;
-//                        map1.put("imagePath",url.toString());
-//                        map1.put("imageName",fileName);
-//                        map1.put("imageUrl",ParamUtil.imageServicePath + allUrl);
-//                        list.add(map1);
-//                    }
-//                }
                     List<UploadFileRes> listModel = new ArrayList<>();
                     String s = File.separator;
                     String filePath = s + "data" + s + "image" + s + System.currentTimeMillis() + s + picName;
@@ -215,7 +160,7 @@ public class ContentManageController {
     }
 
     //查询栏目
-    @RequestMapping(value = "/mange/brand/columnList/listColumnList")
+    @RequestMapping(value = "/manage/brand/columnList/listColumnList")
     @ResponseBody
     public JsonResult listColumnList() {
         List<ColumnList> columnLists = columnListService.listAll();
@@ -227,10 +172,16 @@ public class ContentManageController {
     }
 
     //查询栏目类型
-    @RequestMapping(value = "/mange/brand/columnType/listColumnType")
+    @RequestMapping(value = "/manage/brand/columnType/listColumnType")
     @ResponseBody
-    public JsonResult listColumnType() {
-        List<SysAppConfig> sysAppConfigs = sysAppConfigService.listByCode("class_");
+    public JsonResult listColumnType(Long id) {
+        String type = "";
+        if (String.valueOf(id).equals("1")) {
+            type = "class_";
+        } else if ("2".equals(String.valueOf(id))) {
+            type = "health_";
+        }
+        List<SysAppConfig> sysAppConfigs = sysAppConfigService.listByCode(type);
         if (sysAppConfigs != null || sysAppConfigs.size() > 0) {
             return JsonResult.ok(sysAppConfigs, "栏目类型查询成功");
         } else {
