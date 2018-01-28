@@ -67,5 +67,5 @@ public interface ContentManageMapper {
      */
     int updateByPrimaryKey(ContentManage record);
 
-    List<ContentManage> listAll(ContentManageVo contentManageVo, @Param("offset") int offset, @Param("pageSize") int pageSiz);
+    List<ContentManage> listAll(@Param("contentManageVo") ContentManageVo contentManageVo, @Param("offset") int offset, @Param("pageSize") int pageSiz);
 }

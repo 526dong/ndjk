@@ -280,38 +280,38 @@
         <include refid="Base_Column_List"/>
         from nd_content_manage
         <trim prefix="where" prefixOverrides="and|or">
-            <if test="title !=null and title!=''">
-                and title like CONCAT('%',#{title},'%')
+            <if test="contentManageVo.title !=null and contentManageVo.title!=''">
+                and title like CONCAT('%',#{contentManageVo.title},'%')
             </if>
-            <if test="columnId != null and columnId!=''">
-                and column_id = #{columnId}
+            <if test="contentManageVo.columnId != null and contentManageVo.columnId!=''">
+                and column_id = #{contentManageVo.columnId}
             </if>
-            <if test="columnType != null and columnType!=''">
-                and column_type = #{columnType}
+            <if test="contentManageVo.columnType != null and contentManageVo.columnType!=''">
+                and column_type = #{contentManageVo.columnType}
             </if>
-            <if test="thumbsNumStart !='' and thumbsNumStart !=null">
-                and thumbs_num &gt;= #{thumbsNumStart}
+            <if test="contentManageVo.thumbsNumStart !='' and contentManageVo.thumbsNumStart !=null">
+                and thumbs_num &gt;= #{contentManageVo.thumbsNumStart}
             </if>
             <if test="thumbsNumEnd !='' and thumbsNumEnd !=null">
                 and thumbs_num &lt;= #{thumbsNumEnd}
             </if>
-            <if test="viewsNumStart !='' and viewsNumStart !=null">
-                and views_num &gt;= #{viewsNumStart}
+            <if test="contentManageVo.viewsNumStart !='' and contentManageVo.viewsNumStart !=null">
+                and views_num &gt;= #{contentManageVo.viewsNumStart}
             </if>
-            <if test="viewsNumEnd !='' and viewsNumEnd !=null">
-                and views_num &lt;= #{viewsNumEnd}
+            <if test="contentManageVo.viewsNumEnd !='' and contentManageVo.viewsNumEnd !=null">
+                and views_num &lt;= #{contentManageVo.viewsNumEnd}
             </if>
-            <if test="collectionNumStart !='' and collectionNumStart !=null">
-                and collection_num &gt;= #{collectionNumStart}
+            <if test="contentManageVo.collectionNumStart !='' and contentManageVo.collectionNumStart !=null">
+                and collection_num &gt;= #{contentManageVo.collectionNumStart}
             </if>
-            <if test="collectionNumEnd !='' and collectionNumEnd !=null">
-                and collection_num &lt;= #{collectionNumEnd}
+            <if test="contentManageVo.collectionNumEnd !='' and contentManageVo.collectionNumEnd !=null">
+                and collection_num &lt;= #{contentManageVo.collectionNumEnd}
             </if>
-            <if test="createTimeStart !='' and create_timeStart !=null">
-                and create_time &gt;= #{createTimeStart}
+            <if test="contentManageVo.createTimeStart !='' and contentManageVo.createTimeStart !=null">
+                and create_time &gt;= #{contentManageVo.createTimeStart}
             </if>
-            <if test="createTimeEnd !='' and create_timeEnd !=null">
-                and create_time &lt;= #{createTimeEnd}
+            <if test="contentManageVo.createTimeEnd !='' and contentManageVo.createTimeEnd !=null">
+                and create_time &lt;= #{contentManageVo.createTimeEnd}
             </if>
         </trim>
         <if test="offset != null and pageSize != null">
