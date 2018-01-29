@@ -52,9 +52,9 @@ public class LoginController {
             return new BaseResponseModel(400,"账号或密码错误");
         }
         String imgcode = String.valueOf(session.getAttribute("imgcode"));
-        if(!imgcode.equals(code)){
+        /*if(!imgcode.equals(code)){
             return new BaseResponseModel(400,"验证码错误");
-        }
+        }*/
         session.setAttribute("sysUser",sysUser);
         return new LoginRespModel(200,"登录成功",sysUser.getId());
     }
