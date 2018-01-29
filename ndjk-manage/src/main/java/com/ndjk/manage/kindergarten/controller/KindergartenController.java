@@ -4,6 +4,7 @@ import com.ndjk.cl.brandservice.model.Kindergarten;
 import com.ndjk.cl.brandservice.model.resp.JsonResult;
 import com.ndjk.cl.brandservice.service.KindergartenService;
 import com.ndjk.manage.aspect.Record;
+import org.apache.http.HttpResponse;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,8 @@ public class KindergartenController {
      */
     @RequestMapping(value = "/findAll")
     @ResponseBody
-    public JsonResult findAll(HttpServletRequest request) {
+    public JsonResult findAll(HttpResponse response,HttpServletRequest request) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         //查询条件
         String name = request.getParameter("name");
         String state = request.getParameter("state");
@@ -51,8 +53,8 @@ public class KindergartenController {
      */
     @RequestMapping(value = "/add")
     @ResponseBody
-    public JsonResult add(Kindergarten kindergarten) {
-
+    public JsonResult add(HttpResponse response,Kindergarten kindergarten) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         //创建时间
         kindergarten.setCreateTime(new Date());
         try {
@@ -71,7 +73,8 @@ public class KindergartenController {
      */
     @RequestMapping(value = "/update")
     @ResponseBody
-    public JsonResult update(Kindergarten kindergarten) {
+    public JsonResult update(HttpResponse response,Kindergarten kindergarten) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         if(kindergarten == null){
             return new JsonResult(500,"请输入正确的参数");
         }
@@ -93,7 +96,8 @@ public class KindergartenController {
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public JsonResult delete(@RequestParam Integer id) {
+    public JsonResult delete(HttpResponse response,@RequestParam Integer id) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             kindergartenService.deleteById(id);
             return JsonResult.ok("删除成功");
@@ -110,7 +114,8 @@ public class KindergartenController {
      */
     @RequestMapping(value = "/resetPwd")
     @ResponseBody
-    public JsonResult resetPwd(Kindergarten kindergarten) {
+    public JsonResult resetPwd(HttpResponse response,Kindergarten kindergarten) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             kindergartenService.updatePwdById(kindergarten);
             return JsonResult.ok("密码重置成功");

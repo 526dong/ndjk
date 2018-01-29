@@ -9,6 +9,7 @@ import com.ndjk.cl.brandservice.service.KindergartenService;
 import com.ndjk.cl.utils.ControllerUtil;
 import com.ndjk.cl.utils.MyRuntimeException;
 import com.ndjk.cl.utils.RdPage;
+import org.apache.http.HttpResponse;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,8 @@ public class BrandServiceController {
      */
     @RequestMapping(value = "/searchservicelist")
     @ResponseBody
-    public JsonResult searchservicelist(HttpServletRequest request,int page,int size) {
+    public JsonResult searchservicelist(HttpResponse response,HttpServletRequest request, int page, int size) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         //查询条件-参数集合
         Map<String, Object> params = ControllerUtil.requestMap(request);
         //尽量初始化集合大小
@@ -85,7 +87,8 @@ public class BrandServiceController {
      */
     @RequestMapping(value = "/addkgacount")
     @ResponseBody
-    public JsonResult addkgacount(Kindergarten kindergarten) {
+    public JsonResult addkgacount(HttpResponse response,Kindergarten kindergarten) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         Kindergarten kindergarten1 = this.kindergartenService.selectByLoginName(kindergarten.getLoginName());
         if(kindergarten1 != null){
             return JsonResult.error(400,"账号已存在");
@@ -108,7 +111,8 @@ public class BrandServiceController {
      */
     @RequestMapping(value = "/selectOrderService")
     @ResponseBody
-    public JsonResult selectOrderService(@RequestParam(required = true) Integer orderId) {
+    public JsonResult selectOrderService(HttpResponse response,@RequestParam(required = true) Integer orderId) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         //订单服务数据包
         OrderServicePackage.Order orderEntity = new OrderServicePackage.Order();
         try {
@@ -129,7 +133,8 @@ public class BrandServiceController {
      */
     @RequestMapping(value = "/accept")
     @ResponseBody
-    public JsonResult accept(@RequestParam(required = true) Integer orderId, String priceJsonStr) {
+    public JsonResult accept(HttpResponse response,@RequestParam(required = true) Integer orderId, String priceJsonStr) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         try {
             brandServiceService.updateServiceByOrderId(orderId, priceJsonStr);
             return JsonResult.ok("受理成功");

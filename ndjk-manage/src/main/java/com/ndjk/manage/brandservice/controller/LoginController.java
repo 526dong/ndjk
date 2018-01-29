@@ -8,6 +8,7 @@ import com.ndjk.cl.brandservice.model.resp.LoginRespModel;
 import com.ndjk.cl.brandservice.model.resp.UpdatePwReq;
 import com.ndjk.cl.brandservice.service.KindergartenService;
 import com.ndjk.cl.utils.ValidateCode;
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,8 @@ public class LoginController {
      */
     @RequestMapping(value = "/login")
     @ResponseBody
-    public Object login(HttpSession session,String account,String password,String code){
+    public Object login(HttpResponse response,HttpSession session, String account, String password, String code){
+        response.setHeader("Access-Control-Allow-Origin", "*");
         SysUser sysUser = this.sysUserMapper.selectByLoginName(account);
         if(sysUser == null){
             return new BaseResponseModel(400,"账号或密码错误");
@@ -66,7 +68,8 @@ public class LoginController {
      */
     @RequestMapping(value = "/brandservice/updatepassword")
     @ResponseBody
-    public Object updatepassword(UpdatePwReq updatePwReq) {
+    public Object updatepassword(HttpResponse response,UpdatePwReq updatePwReq) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         String result = this.kindergartenService.updatePassWord(updatePwReq.getKgId(),
                 updatePwReq.getOldPassword(),updatePwReq.getNewPassword());
         if(result == null){
@@ -84,7 +87,7 @@ public class LoginController {
     @ResponseBody
     public void generate(HttpServletResponse response,
                          HttpSession session) throws Exception {
-
+        response.setHeader("Access-Control-Allow-Origin", "*");
         // 设置响应的类型格式为图片格式
         response.setContentType("image/jpeg");
         //禁止图像缓存。
