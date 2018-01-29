@@ -11,7 +11,6 @@ import com.ndjk.cl.brandservice.service.BrandOrderServiceService;
 import com.ndjk.cl.brandservice.service.BrandServiceOrderService;
 import com.ndjk.cl.brandservice.service.BrandServiceService;
 import com.ndjk.cl.brandservice.service.KindergartenService;
-import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,8 +52,7 @@ public class BrandServiceController {
      */
     @RequestMapping(value = "/brandservice/applyservice")
     @ResponseBody
-    public Object applyService(HttpResponse response,ApplyServiceReq applyServiceReq){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+    public Object applyService(ApplyServiceReq applyServiceReq){
         //1、生成订单，返回订单id
         ServiceOrder serviceOrder = new ServiceOrder();
         serviceOrder.setActivityName(applyServiceReq.getActivityName());
@@ -104,8 +102,7 @@ public class BrandServiceController {
      */
     @RequestMapping(value = "")
     @ResponseBody
-    public Object getservicelist(HttpResponse response,int type){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+    public Object getservicelist(int type){
         List<BrandService> brandServices = this.brandServiceService.selectByType(type);
         if(brandServices ==null || brandServices.size()<1){
             return new GetBrandServiceListRespModel(400,"服务列表为空");
@@ -129,8 +126,7 @@ public class BrandServiceController {
      */
     @RequestMapping(value = "/brandservice/selectKgApplyServiceList")
     @ResponseBody
-    public Object selectKgApplyServiceList(HttpResponse response,int kgId){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+    public Object selectKgApplyServiceList(int kgId){
         List<ApplyServiceListModel> selectApplyServiceListRespModels =
                 this.brandServiceOrderService.selectByKgId(kgId);
         if (selectApplyServiceListRespModels == null || selectApplyServiceListRespModels.size()<1){
