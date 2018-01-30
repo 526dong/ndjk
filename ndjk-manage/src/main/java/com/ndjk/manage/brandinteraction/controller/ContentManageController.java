@@ -189,4 +189,21 @@ public class ContentManageController {
             return JsonResult.error(400, "栏目类型查询出错");
         }
     }
+
+
+    @RequestMapping(value = "/manage/brand/interaction/selectContentManage")
+    @ResponseBody
+    public JsonResult selectContentManage(Long id) {
+        try {
+            ContentManage contentManage = contentManageService.selectContentManage(id);
+            if (contentManage != null) {
+                return JsonResult.ok(contentManage, "内容查询成功");
+            } else {
+                return JsonResult.error(400, "内容查询出错");
+            }
+        } catch (Exception e) {
+            logger.error("查询内容列表异常", e);
+            return JsonResult.error(400, "内容查询出错");
+        }
+    }
 }
