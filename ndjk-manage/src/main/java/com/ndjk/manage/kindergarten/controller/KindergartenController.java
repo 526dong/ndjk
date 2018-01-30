@@ -39,7 +39,7 @@ public class KindergartenController {
     @ResponseBody
     public JsonResult findAll(HttpServletRequest request) {
         //查询条件
-        String name = request.getParameter("name");
+        String name = request.getParameter("kgName");
         String state = request.getParameter("state");
         return kindergartenService.selectListByNameAndState(name, state,1,10);
     }
