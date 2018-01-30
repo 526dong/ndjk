@@ -17,6 +17,15 @@ public class ContentManageVo extends ContentManage {
     private Integer collectionNumEnd;
     private Date createTimeStart;
     private Date createTimeEnd;
+    private String sort;
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
 
     public ContentManageVo() {
     }

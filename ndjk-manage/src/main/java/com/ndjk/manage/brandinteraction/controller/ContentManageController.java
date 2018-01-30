@@ -57,7 +57,7 @@ public class ContentManageController {
             if(contentManageVo==null){
                 contentManageVo=new ContentManageVo();
             }
-            List<ContentManage> contentManages = contentManageService.listContent(contentManageVo, page, size);
+            List<ContentManage> contentManages = contentManageService.listContent(contentManageVo, page-1, size);
             if (contentManages != null && contentManages.size() > 0) {
                 return JsonResult.ok(contentManages, "内容查询成功");
             } else {
@@ -73,6 +73,7 @@ public class ContentManageController {
     @RequestMapping(value = "/manage/brand/interaction/updateContentManage")
     @ResponseBody
     public JsonResult updateContentManage(ContentManage contentManage) {
+        contentManage.setUpdateTime(new Date());
         int i = contentManageService.updateContentManage(contentManage);
         if (i > 0) {
             return JsonResult.ok(i, "内容修改成功");
@@ -149,6 +150,8 @@ public class ContentManageController {
                 }
             }
             cm.setPictureUrl(filePathes);
+            cm.setCreateTime(new Date());
+            cm.setUpdateTime(new Date());
             int i = contentManageService.insertContentManage(cm);
             if (i > 0) {
                 return JsonResult.ok(i, "发布内容成功");
