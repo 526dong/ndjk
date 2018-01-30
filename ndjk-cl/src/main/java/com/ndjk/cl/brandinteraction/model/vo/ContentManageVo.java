@@ -15,8 +15,8 @@ public class ContentManageVo extends ContentManage {
     private Integer viewsNumEnd;
     private Integer collectionNumStart;
     private Integer collectionNumEnd;
-    private Date create_timeStart;
-    private Date create_timeEnd;
+    private Date createTimeStart;
+    private Date createTimeEnd;
 
     public ContentManageVo() {
     }
@@ -69,19 +69,20 @@ public class ContentManageVo extends ContentManage {
         this.collectionNumEnd = collectionNumEnd;
     }
 
-    public Date getCreate_timeStart() {
-        return create_timeStart;
+
+    public Date getCreateTimeStart() {
+        return createTimeStart;
     }
 
-    public void setCreate_timeStart(Date create_timeStart) {
-        this.create_timeStart = create_timeStart;
+    public void setCreateTimeStart(Date createTimeStart) {
+        this.createTimeStart = createTimeStart;
     }
 
-    public Date getCreate_timeEnd() {
-        return create_timeEnd;
+    public Date getCreateTimeEnd() {
+        return createTimeEnd;
     }
 
-    public void setCreate_timeEnd(Date create_timeEnd) {
-        this.create_timeEnd = create_timeEnd;
+    public void setCreateTimeEnd(Date createTimeEnd) {
+        this.createTimeEnd = createTimeEnd;
     }
 }
