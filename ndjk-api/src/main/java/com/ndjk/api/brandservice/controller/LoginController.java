@@ -5,7 +5,10 @@ import com.ndjk.cl.brandservice.model.resp.BaseResponseModel;
 import com.ndjk.cl.brandservice.model.resp.LoginRespModel;
 import com.ndjk.cl.brandservice.model.resp.UpdatePwReq;
 import com.ndjk.cl.brandservice.service.KindergartenService;
+import com.ndjk.cl.brandservice.service.impl.BrandServiceOrderServiceImpl;
 import com.ndjk.cl.utils.ValidateCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +27,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping(value = "/api")
 public class LoginController {
-
+    public static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
     private KindergartenService kindergartenService;
     /**
@@ -48,6 +51,7 @@ public class LoginController {
             return new BaseResponseModel(400,"账号或密码错误");
         }
         String imgcode = String.valueOf(session.getAttribute("imgcode"));
+        logger.info("上送code为："+code+"session中的code为"+imgcode);
         if(!imgcode.equals(code)){
             return new BaseResponseModel(400,"验证码错误");
         }

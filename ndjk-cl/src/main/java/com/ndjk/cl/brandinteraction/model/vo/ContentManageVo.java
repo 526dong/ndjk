@@ -69,6 +69,7 @@ public class ContentManageVo extends ContentManage {
         this.collectionNumEnd = collectionNumEnd;
     }
 
+
     public Date getCreateTimeStart() {
         return createTimeStart;
     }

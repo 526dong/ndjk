@@ -47,23 +47,6 @@ public class ContentManageController {
     @Autowired
     private SysAppConfigService sysAppConfigService;
 
-    /**
-     * 发布内容接口
-     *
-     * @param contentManage
-     * @return
-     */
-    @RequestMapping(value = "/mange/brand/interaction/addContentManage")
-    @ResponseBody
-    public JsonResult addContentManage(ContentManage contentManage) {
-        int i = contentManageService.insertContentManage(contentManage);
-        if (i > 0) {
-            return JsonResult.ok(i, "发布内容成功");
-        } else {
-            return JsonResult.error(400, "发布内容出错");
-        }
-    }
-
     //内容列表
     @RequestMapping(value = "/manage/brand/interaction/listContentManage")
     @ResponseBody
@@ -104,9 +87,9 @@ public class ContentManageController {
     public JsonResult deleteContentManage(Long id) {
         int i = contentManageService.deleteContentManage(id);
         if (i > 0) {
-            return JsonResult.ok(i, "内容修改成功");
+            return JsonResult.ok(i, "内容删除成功");
         } else {
-            return JsonResult.error(400, "内容修改出错");
+            return JsonResult.error(400, "内容删除出错");
         }
     }
 

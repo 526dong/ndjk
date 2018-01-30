@@ -76,6 +76,11 @@ public class SystemSettingController {
         return new JsonResult(200,"操作成功");
     }
 
+    /**
+     * 排序
+     * @param idStr
+     * @return
+     */
     @RequestMapping("/sysconfig/sortservice")
     @ResponseBody
     public JsonResult sortservice(String idStr){
