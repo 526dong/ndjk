@@ -73,6 +73,7 @@ public class ContentManageController {
     @RequestMapping(value = "/manage/brand/interaction/updateContentManage")
     @ResponseBody
     public JsonResult updateContentManage(ContentManage contentManage) {
+        contentManage.setUpdateTime(new Date());
         int i = contentManageService.updateContentManage(contentManage);
         if (i > 0) {
             return JsonResult.ok(i, "内容修改成功");
@@ -149,6 +150,8 @@ public class ContentManageController {
                 }
             }
             cm.setPictureUrl(filePathes);
+            cm.setCreateTime(new Date());
+            cm.setUpdateTime(new Date());
             int i = contentManageService.insertContentManage(cm);
             if (i > 0) {
                 return JsonResult.ok(i, "发布内容成功");
