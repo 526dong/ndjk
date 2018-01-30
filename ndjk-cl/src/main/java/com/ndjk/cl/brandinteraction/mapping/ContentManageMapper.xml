@@ -292,8 +292,8 @@
             <if test="contentManageVo.thumbsNumStart !='' and contentManageVo.thumbsNumStart !=null">
                 and thumbs_num &gt;= #{contentManageVo.thumbsNumStart}
             </if>
-            <if test="thumbsNumEnd !='' and thumbsNumEnd !=null">
-                and thumbs_num &lt;= #{thumbsNumEnd}
+            <if test="contentManageVo.thumbsNumEnd !='' and contentManageVo.thumbsNumEnd !=null">
+                and thumbs_num &lt;= #{contentManageVo.thumbsNumEnd}
             </if>
             <if test="contentManageVo.viewsNumStart !='' and contentManageVo.viewsNumStart !=null">
                 and views_num &gt;= #{contentManageVo.viewsNumStart}
