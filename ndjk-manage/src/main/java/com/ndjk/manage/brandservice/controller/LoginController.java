@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  * @since 9:50  2018/1/8
  */
 @Controller
-@RequestMapping(value = "/modules/manage")
+@RequestMapping(value = "/manage")
 public class LoginController {
 
     @Autowired
