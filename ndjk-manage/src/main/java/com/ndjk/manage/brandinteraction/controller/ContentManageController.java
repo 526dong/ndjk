@@ -71,6 +71,9 @@ public class ContentManageController {
                                         HttpServletResponse response) {
         ContentManageVo contentManageVo = GsonUtil.fromJson(ContentManageVo.class, searchParams);
         try {
+            if(contentManageVo==null){
+                contentManageVo=new ContentManageVo();
+            }
             List<ContentManage> contentManages = contentManageService.listContent(contentManageVo, page, size);
             if (contentManages != null && contentManages.size() > 0) {
                 return JsonResult.ok(contentManages, "内容查询成功");
