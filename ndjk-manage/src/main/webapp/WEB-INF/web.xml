@@ -72,23 +72,23 @@
 		<url-pattern>/dicAction/*</url-pattern>
 	</filter-mapping>-->
 
-	<!--<filter>
+	<filter>
 		<description>
 		</description>
-		<display-name>WebApiSessionCheckFilter</display-name>
-		<filter-name>WebApiSessionCheckFilter</filter-name>
-		<filter-class>com.ndjk.cl.filter.WebApiSessionCheckFilter</filter-class>
+		<display-name>WebManageSessionCheckFilter</display-name>
+		<filter-name>WebManageSessionCheckFilter</filter-name>
+		<filter-class>com.ndjk.cl.filter.WebManageSessionCheckFilter</filter-class>
 		<init-param>
 			<description>
 			</description>
 			<param-name>ignore</param-name>
-			<param-value>/api/brandservice/login;/api/user/imgCode/generate;/api/brandservice/getservicelist</param-value>
+			<param-value>/manage/login;/manage/user/imgCode/generate</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>WebApiSessionCheckFilter</filter-name>
-		<url-pattern>/api/*</url-pattern>
-	</filter-mapping>-->
+		<filter-name>WebManageSessionCheckFilter</filter-name>
+		<url-pattern>/manage/*</url-pattern>
+	</filter-mapping>-
 
 	<filter>
 		<filter-name>XSSRequestFilter</filter-name>
