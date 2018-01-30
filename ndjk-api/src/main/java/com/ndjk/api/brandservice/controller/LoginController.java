@@ -52,9 +52,9 @@ public class LoginController {
         }
         String imgcode = String.valueOf(session.getAttribute("imgcode"));
         logger.info("上送code为："+code+"session中的code为"+imgcode);
-        /*if(!imgcode.equals(code)){
+        if(!imgcode.equals(code)){
             return new BaseResponseModel(400,"验证码错误");
-        }*/
+        }
         session.setAttribute("kindergarten",kindergarten);
         return new LoginRespModel(200,"登录成功",kindergarten.getId());
     }
