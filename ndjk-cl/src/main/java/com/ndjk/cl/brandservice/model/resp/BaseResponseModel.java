@@ -12,14 +12,14 @@ public class BaseResponseModel implements Serializable{
 
     private Integer code;
 
-    private String message;
+    private String msg;
 
     public BaseResponseModel() {
     }
 
-    public BaseResponseModel(Integer code, String message) {
+    public BaseResponseModel(Integer code, String msg) {
         this.code = code;
-        this.message = message;
+        this.msg = msg;
     }
 
     public Integer getCode() {
@@ -30,11 +30,11 @@ public class BaseResponseModel implements Serializable{
         this.code = code;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }
