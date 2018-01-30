@@ -55,4 +55,9 @@ public class ContentManageServiceImpl implements ContentManageService {
     public int deleteContentManage(Long id) {
         return contentManageMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public ContentManage selectContentManage(Long id) {
+        return contentManageMapper.selectByPrimaryKey(id);
+    }
 }
