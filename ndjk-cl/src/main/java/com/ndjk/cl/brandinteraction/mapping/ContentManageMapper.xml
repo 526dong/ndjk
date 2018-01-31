@@ -318,7 +318,7 @@
             order by #{contentManageVo.sort} DESC
         </if>
         <choose>
-            <when test="contentManageVo.sort='' and contentManageVo.sort !=null">
+            <when test="contentManageVo.sort!='' and contentManageVo.sort !=null">
                 order by #{contentManageVo.sort} DESC
             </when>
             <otherwise>
