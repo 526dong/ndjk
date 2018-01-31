@@ -1,10 +1,10 @@
-package com.ndjk.manage.system;
+package com.ndjk.manage.system.controller;
 
 import org.apache.log4j.Logger;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.context.annotation.Scope;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -18,11 +18,12 @@ import java.io.*;
  */
 @Controller
 @Scope("prototype")
-public class ReadFileController {
+public class ReadFileManageController {
 	
-	private static final Logger logger = Logger.getLogger(ReadFileController.class);
+	private static final Logger logger = Logger.getLogger(ReadFileManageController.class);
 	
-	@RequestMapping(value = "/readFile.htm")
+	@RequestMapping(value = "/manage/readFile.htm")
+	@ResponseBody
 	public String readImg(HttpServletRequest request, HttpServletResponse response)  {
 		InputStream imageIn = null;
 		BufferedInputStream bis = null;
