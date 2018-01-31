@@ -6,6 +6,7 @@ import com.ndjk.cl.brandservice.model.SysUser;
 import com.ndjk.cl.brandservice.model.resp.JsonResult;
 import com.ndjk.cl.brandservice.service.SysUserService;
 import com.ndjk.cl.utils.GsonUtil;
+import com.ndjk.cl.utils.StringUtil;
 import com.ndjk.manage.brandinteraction.controller.ContentManageController;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,6 +54,16 @@ public class SysUserController {
     @RequestMapping(value = "/manage/sysuser/saveUser")
     @ResponseBody
     public JsonResult saveUser(SysUser sysUser) {
+        if(sysUser==null){
+            return JsonResult.error(400, "用户信息有误，请重新保存");
+        }
+
+        if(StringUtil.isBlank(sysUser.getLoginName())){
+            return JsonResult.error(400, "用户登录名不能为空");
+        }
+        if(StringUtil.isBlank(sysUser.getPassword())){
+            return JsonResult.error(400, "用户密码不能为空");
+        }
         int i = sysUserService.saveUser(sysUser);
         if (i > 0) {
             return JsonResult.ok(i, "保存用户成功");

@@ -60,7 +60,7 @@ public class WebManageSessionCheckFilter implements Filter{
             return;
         }
 
-        if (true) {
+        if (this.checkSession(r)) {
             chain.doFilter(request, response);
         } else {
             request.setCharacterEncoding(UTF8);
