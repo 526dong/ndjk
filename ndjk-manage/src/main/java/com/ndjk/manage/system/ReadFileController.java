@@ -22,7 +22,7 @@ public class ReadFileController {
 	
 	private static final Logger logger = Logger.getLogger(ReadFileController.class);
 	
-	@RequestMapping(value = "/manage/readFile.htm")
+	@RequestMapping(value = "/readFile.htm")
 	public String readImg(HttpServletRequest request, HttpServletResponse response)  {
 		InputStream imageIn = null;
 		BufferedInputStream bis = null;
