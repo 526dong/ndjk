@@ -37,7 +37,7 @@ public class SysUserController {
             if(sysUser==null){
                 sysUser=new SysUser();
             }
-            List<SysUser> sysUsers = sysUserService.listAll(sysUser, page, size);
+            List<SysUser> sysUsers = sysUserService.listAll(sysUser, page-1, size);
             if (sysUsers != null && sysUsers.size() > 0) {
                 return JsonResult.ok(sysUsers, "用户查询成功");
             } else {
