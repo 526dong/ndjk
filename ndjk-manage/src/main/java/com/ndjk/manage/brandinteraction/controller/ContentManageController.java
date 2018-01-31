@@ -145,9 +145,11 @@ public class ContentManageController {
                     List<UploadFileRes> listModel = new ArrayList<>();
                     String s = File.separator;
                     String filePath = s + "data" + s + "image" + s + System.currentTimeMillis() + s + picName;
-
                     UploadFileUtil.saveMultipartFile(listModel, file, filePath);
-                    filePathes += listModel.get(0).getResPath()+";";
+                    if (s.equals("\\")) {
+                        filePath = "D:" + filePath;
+                    }
+                    filePathes+=filePath+";";
                 }
             }
             cm.setPictureUrl(filePathes);
