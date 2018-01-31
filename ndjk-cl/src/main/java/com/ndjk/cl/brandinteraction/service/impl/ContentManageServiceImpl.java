@@ -8,6 +8,7 @@ import com.ndjk.cl.brandinteraction.model.vo.ContentManageVo;
 import com.ndjk.cl.brandinteraction.service.ContentManageService;
 import com.ndjk.cl.sys.dao.SysAppConfigMapper;
 import com.ndjk.cl.sys.model.SysAppConfig;
+import com.ndjk.cl.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,15 @@ public class ContentManageServiceImpl implements ContentManageService {
 
     @Override
     public List<ContentManage> listContent(ContentManageVo contentManageVo, int currentPage, int pageSize) {
+        if(contentManageVo!=null&& StringUtil.isNotBlank(contentManageVo.getSort())){
+            if("thumbsNum".equals(contentManageVo.getSort())){
+                contentManageVo.setSort("thumbs_num");
+            }else if("viewsNum".equals(contentManageVo.getSort())){
+                contentManageVo.setSort("views_num");
+            }else if("createTime".equals(contentManageVo.getSort())) {
+                contentManageVo.setSort("create_time");
+            }
+        }
         List<ContentManage> contentManages = contentManageMapper.listAll(contentManageVo, currentPage, pageSize);
         for (ContentManage contentManage : contentManages) {
             ColumnList columnList = columnListMapper.selectByPrimaryKey(contentManage.getColumnId());

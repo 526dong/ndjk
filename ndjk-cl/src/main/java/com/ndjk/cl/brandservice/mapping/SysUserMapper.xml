@@ -141,7 +141,7 @@
         and login_name like CONCAT('%',#{sysUser.loginName},'%')
       </if>
     </trim>
-    order by create_time DESC 
+    order by create_time DESC
     <if test="offset != null and pageSize != null">
       limit #{offset} , #{pageSize}
     </if>
