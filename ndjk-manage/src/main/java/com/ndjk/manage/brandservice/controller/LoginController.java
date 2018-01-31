@@ -96,4 +96,18 @@ public class LoginController {
         vCode.write(response.getOutputStream());
         response.getOutputStream().flush();
     }
+
+    /**
+     * @description 退出登录
+     * @author wdl
+     * @date 2017/12/7 21:23
+     */
+    @RequestMapping("/user/exitlogin")
+    @ResponseBody
+    public Object exitLogin(HttpServletResponse response,
+                         HttpSession session) throws Exception {
+
+        session.removeAttribute("sysUser");
+        return new BaseResponseModel(200,"操作成功");
+    }
 }

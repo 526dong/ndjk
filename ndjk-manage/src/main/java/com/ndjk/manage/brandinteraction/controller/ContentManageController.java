@@ -57,7 +57,7 @@ public class ContentManageController {
             if(contentManageVo==null){
                 contentManageVo=new ContentManageVo();
             }
-            List<ContentManage> contentManages = contentManageService.listContent(contentManageVo, page, size);
+            List<ContentManage> contentManages = contentManageService.listContent(contentManageVo, page-1, size);
             if (contentManages != null && contentManages.size() > 0) {
                 return JsonResult.ok(contentManages, "内容查询成功");
             } else {
@@ -73,6 +73,7 @@ public class ContentManageController {
     @RequestMapping(value = "/manage/brand/interaction/updateContentManage")
     @ResponseBody
     public JsonResult updateContentManage(ContentManage contentManage) {
+        contentManage.setUpdateTime(new Date());
         int i = contentManageService.updateContentManage(contentManage);
         if (i > 0) {
             return JsonResult.ok(i, "内容修改成功");
@@ -149,6 +150,8 @@ public class ContentManageController {
                 }
             }
             cm.setPictureUrl(filePathes);
+            cm.setCreateTime(new Date());
+            cm.setUpdateTime(new Date());
             int i = contentManageService.insertContentManage(cm);
             if (i > 0) {
                 return JsonResult.ok(i, "发布内容成功");
@@ -187,6 +190,23 @@ public class ContentManageController {
             return JsonResult.ok(sysAppConfigs, "栏目类型查询成功");
         } else {
             return JsonResult.error(400, "栏目类型查询出错");
+        }
+    }
+
+
+    @RequestMapping(value = "/manage/brand/interaction/selectContentManage")
+    @ResponseBody
+    public JsonResult selectContentManage(Long id) {
+        try {
+            ContentManage contentManage = contentManageService.selectContentManage(id);
+            if (contentManage != null) {
+                return JsonResult.ok(contentManage, "内容查询成功");
+            } else {
+                return JsonResult.error(400, "内容查询出错");
+            }
+        } catch (Exception e) {
+            logger.error("查询内容列表异常", e);
+            return JsonResult.error(400, "内容查询出错");
         }
     }
 }

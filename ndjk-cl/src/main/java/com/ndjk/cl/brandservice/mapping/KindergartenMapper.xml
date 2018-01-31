@@ -148,11 +148,12 @@
     from kindergarten
     <where>
       <if test="kgName != null and kgName !=''" >
-        kg_name = #{kgName,jdbcType=VARCHAR}
+        kg_name like concat('%',#{kgName},'%')
       </if>
       <if test="status != null and status != 0" >
         and status = #{status,jdbcType=INTEGER}
       </if>
     </where>
+    ORDER BY create_time DESC
   </select>
 </mapper>

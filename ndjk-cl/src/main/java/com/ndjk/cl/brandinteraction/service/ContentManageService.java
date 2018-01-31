@@ -22,4 +22,6 @@ public interface ContentManageService {
 
     //内容删除
     int deleteContentManage(Long id);
+    //通过id查询一条信息
+    ContentManage selectContentManage(Long id);
 }
