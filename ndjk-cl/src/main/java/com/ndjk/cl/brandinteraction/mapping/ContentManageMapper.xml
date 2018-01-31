@@ -314,17 +314,9 @@
                 and create_time &lt;= #{contentManageVo.createTimeEnd}
             </if>
         </trim>
-        <if test="contentManageVo.sort='' and contentManageVo.sort !=null">
+        <if test="contentManageVo.sort!='' and contentManageVo.sort !=null">
             order by #{contentManageVo.sort} DESC
         </if>
-        <choose>
-            <when test="contentManageVo.sort!='' and contentManageVo.sort !=null">
-                order by #{contentManageVo.sort} DESC
-            </when>
-            <otherwise>
-                order by create_time DESC
-            </otherwise>
-        </choose>
         <if test="offset != null and pageSize != null">
             limit #{offset} , #{pageSize}
         </if>

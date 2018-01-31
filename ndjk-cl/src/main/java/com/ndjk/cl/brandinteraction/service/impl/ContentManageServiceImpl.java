@@ -43,6 +43,8 @@ public class ContentManageServiceImpl implements ContentManageService {
             }else if("createTime".equals(contentManageVo.getSort())) {
                 contentManageVo.setSort("create_time");
             }
+        }else{
+            contentManageVo.setSort("create_time");
         }
         List<ContentManage> contentManages = contentManageMapper.listAll(contentManageVo, currentPage, pageSize);
         for (ContentManage contentManage : contentManages) {
