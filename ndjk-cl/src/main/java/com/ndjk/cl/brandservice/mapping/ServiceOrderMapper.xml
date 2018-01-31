@@ -246,7 +246,7 @@
       <if test="null != applyEndTime and applyEndTime != ''">and #{applyEndTime}>= DATE_FORMAT(so.create_time,'%Y-%m-%d')</if>
       <if test="null != state and '' != state" > and so.state = #{state} </if>
     </where>
-    ORDER BY create_time DESC
+    ORDER BY so.create_time DESC
     <if test="beginPage != null and pageSize != null">
       limit ${beginPage},${pageSize}
     </if>

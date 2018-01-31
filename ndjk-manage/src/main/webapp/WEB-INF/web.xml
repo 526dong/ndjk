@@ -72,7 +72,7 @@
 		<url-pattern>/dicAction/*</url-pattern>
 	</filter-mapping>-->
 
-	<filter>
+	<!--<filter>
 		<description>
 		</description>
 		<display-name>WebManageSessionCheckFilter</display-name>
@@ -88,7 +88,7 @@
 	<filter-mapping>
 		<filter-name>WebManageSessionCheckFilter</filter-name>
 		<url-pattern>/manage/*</url-pattern>
-	</filter-mapping>-
+	</filter-mapping>-->
 
 	<filter>
 		<filter-name>XSSRequestFilter</filter-name>
