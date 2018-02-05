@@ -54,6 +54,9 @@ public class ContentManageServiceImpl implements ContentManageService {
             param.put("code", contentManage.getColumnType());
             SysAppConfig selective = sysAppConfigMapper.findSelective(param);
             contentManage.setColumnTypeStr(selective.getName());
+            String pictureUrl = contentManage.getPictureUrl();
+            String[] split = pictureUrl.split(";");
+            contentManage.setPictureUrlList(split);
         }
         return contentManages;
     }

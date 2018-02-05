@@ -203,6 +203,9 @@ public class ContentManageController {
         try {
             ContentManage contentManage = contentManageService.selectContentManage(id);
             if (contentManage != null) {
+                String pictureUrl = contentManage.getPictureUrl();
+                String[] split = pictureUrl.split(";");
+                contentManage.setPictureUrlList(split);
                 return JsonResult.ok(contentManage, "内容查询成功");
             } else {
                 return JsonResult.error(400, "内容查询出错");
